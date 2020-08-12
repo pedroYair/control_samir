@@ -14,16 +14,17 @@
         echo "Conectado a la bd $bd";
     }
 
-    /*
+    
     session_start();
 
-    // verifica que el usuario tenga el nivel de administrador para hacer cambios en el panel de control
+    /* verifica que el usuario tenga el nivel de administrador para hacer cambios en el panel de control
     function verificar_seguridad($nivel = "administrador")
     {
         return $_SESSION['NIVEL'] == $nivel;
     }
-    */
 
+    */
+    
     //para asegurar la bd de ataques por inyeccion sql
     function escape($valor)
     {
