@@ -6,6 +6,21 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
 
+  <?php
+			if( isset($_SESSION['login']) ){
+				if($_SESSION['login'] == 'error')
+				{
+					echo '<p style="padding: 4px; font-size: 10px; background: pink; color: darkred">Email o clave incorrectos</p>';
+				}
+				else
+				{
+					echo '<p style="padding: 4px; font-size: 10px; background: pink; color: darkred">Cuenta deshabilitada</p>';
+				}
+				
+				unset($_SESSION['login']);
+			}			
+	?>
+
     <form action="accionesForms/login.php" method="post">
       <div class="form-group has-feedback">
         <input type="email" class="form-control" placeholder="Email" name="email">

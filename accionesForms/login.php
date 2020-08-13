@@ -12,11 +12,11 @@
 			EMAIL,
 			FOTO,
 			NIVEL,
-			IF( ESTADO = 1 , 'Activo', 'Inactivo' ) AS ESTADO,
+			ESTADO,
 			FECHA_ALTA,
 			DATE_FORMAT( FECHA_ALTA , '%d-%m-%Y %H:%ihs' ) AS FECHA_ESPANIOL
 		FROM 
-			usuarios
+			listado_usuarios
 		WHERE 
 			EMAIL='$email' AND CLAVE='$cl'
 		LIMIT 1";
@@ -29,7 +29,6 @@
 		if($a['ESTADO'] == "Activo")
 		{
 			$_SESSION = $a; // se creara una variable de sesion por cada columna que retorne la consulta sql
-			echo "creando sesiones";
 		}
 		else
 		{
@@ -40,7 +39,6 @@
 	else
 	{
 		$_SESSION['login'] = "error";
-		echo "error";
 	}
 
 	header("Location: ../index.php" );
