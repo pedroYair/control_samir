@@ -1,7 +1,7 @@
 
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Donde</b>Samir</a>
+    <a href="#"><b>Donde</b>Samir</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

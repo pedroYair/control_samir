@@ -92,12 +92,15 @@ TABLES;
 				switch( $seccion ):
 				case 'home': include("contenidos/base/small_boxes.php"); break;
         case 'servicios': 
+
           $accion = $_GET['accion'];
-          if($accion == "listar")
-          {
-            include( 'contenidos/servicios/listar.php');
-          }
-          break;
+
+          switch( $accion ):
+            case 'listar': include( 'contenidos/servicios/listar.php'); break;
+            case 'agregar': include( 'contenidos/servicios/agregar.php'); break;
+          endswitch;
+        break;
+          
 				case 'categoria': include( 'contenidos/categoria.php' ); break;
 				case 'registro': include( 'contenidos/registro.php' ); break;
 				case 'contrasenia' : include( 'contenidos/recuperar.php' ); break;
@@ -198,7 +201,6 @@ TABLES;
 <!-- page script -->
 <script>
   $(function () {
-    $('#example1').DataTable()
     $('#example2').DataTable({
       'paging'      : true,
       'lengthChange': false,
