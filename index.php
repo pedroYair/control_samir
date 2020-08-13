@@ -11,7 +11,7 @@ include( 'setup/configuracion.php' );
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>DondeSamir | Dashboard</title>
+  <title>DondeSamir</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -29,12 +29,26 @@ include( 'setup/configuracion.php' );
   <link rel="stylesheet" href="bower_components/morris.js/morris.css">
   <!-- jvectormap -->
   <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">
+  
   <!-- Date Picker -->
   <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">
+  
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+  <?php
+  
+	if(isset($_GET['accion']) and $_GET['accion'] == "listar")
+	{
+		echo <<<TABLES
+	<!-- DataTables -->
+  <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+TABLES;
+	}
+  
+  ?>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -52,11 +66,11 @@ include( 'setup/configuracion.php' );
   <!-- HEADER - ASIDE -->
   <?php
 	
-	if(isset($_SESSION['NIVEL']))
-	{
-		include("contenidos/base/header.php");
-		include("contenidos/base/aside.php");
-	}
+    if(isset($_SESSION['NIVEL']))
+    {
+      include("contenidos/base/header.php");
+      include("contenidos/base/aside.php");
+    }
 
   ?>
   
@@ -67,14 +81,46 @@ include( 'setup/configuracion.php' );
     <section class="content">
 	
       <?php
-		if($seccion == "home" and isset($_SESSION['NIVEL']))
+		if($cnx === false)
 		{
-			include("contenidos/base/small_boxes.php");
+			include( 'contenidos/noSql.php' );
 		}
 		else
 		{
-			include("contenidos/login.php");
+			if($seccion and isset($_SESSION['NIVEL']))
+			{
+				switch( $seccion ):
+				case 'home': include("contenidos/base/small_boxes.php"); break;
+        case 'servicios': 
+          $accion = $_GET['accion'];
+          if($accion == "listar")
+          {
+            include( 'contenidos/servicios/listar.php');
+          }
+          break;
+				case 'categoria': include( 'contenidos/categoria.php' ); break;
+				case 'registro': include( 'contenidos/registro.php' ); break;
+				case 'contrasenia' : include( 'contenidos/recuperar.php' ); break;
+				case 'perfil': include( 'contenidos/perfil.php'); break;
+				case 'contacto': include( 'contenidos/contacto.php'); break;
+				case 'gracias': include( 'contenidos/gracias.php'); break;
+				case 'static': include( 'contenidos/static.php'); break;
+				case 'leer': include( 'contenidos/leer.php'); break;
+				case 'buscar': include( 'contenidos/busqueda.php'); break;
+				case 'error': include( 'contenidos/error_document.php'); break;
+				default: 
+					echo "<p class='error'>La sección solicitada ($seccion), no existe</p>";
+					include( 'contenidos/home.php' ); 
+					break;
+				endswitch;
+				
+			}
+			else
+			{
+				include("contenidos/login.php");
+			}
 		}
+	 
 	  ?>
 	  
 	  
@@ -140,5 +186,32 @@ include( 'setup/configuracion.php' );
 <script src="dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+
+<?php
+  
+	if(!isset($_GET['accion']) or $_GET['accion'] == "listar")
+	{
+		echo <<<TABLES
+<!-- DataTables -->
+<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
+TABLES;
+	}
+  
+  ?>
 </body>
 </html>
