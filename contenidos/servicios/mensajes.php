@@ -32,11 +32,11 @@
     break;
 
     case 'ok_editar': 
-      echo $mensaje_agregar_ok;
+      echo $mensaje_editar_ok;
     break;
 
     case 'error_editar':
-      echo $mensaje_agregar_error;
+      echo $mensaje_editar_error;
     break;
 
   }

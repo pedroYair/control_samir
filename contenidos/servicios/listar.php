@@ -57,7 +57,10 @@
 							  <td>$columnas[SERVICIO]</td>
 							  <td>$columnas[PRECIO]</td>
 							  <td>$columnas[OBSERVACION]</td>
-							  <td>Editar - Eliminar</td>
+                <td>
+                  <a class="btn btn-warning .edit" href="index.php?seccion=servicios&accion=editar&id=$columnas[ID]" title="Editar"><i class="fa fa-pencil"></i></a>
+                  <a class="btn btn-danger delete" href="../../accionesForms/servicios/eliminar.php?id=$columnas[ID]" onclick="return confirm('¿Eliminar este servicio?')" title="Eliminar"><i class="fa fa-trash"></i></a>
+                </td>
 							</tr>
 fila;
             $contador++;

@@ -38,6 +38,10 @@ include( 'setup/configuracion.php' );
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
+  <style>
+        th, td {text-align: center}
+  </style>
+
   <?php
   
 	if(isset($_GET['accion']) and $_GET['accion'] == "listar")
@@ -98,6 +102,8 @@ TABLES;
           switch( $accion ):
             case 'listar': include( 'contenidos/servicios/listar.php'); break;
             case 'agregar': include( 'contenidos/servicios/agregar.php'); break;
+            case 'editar': include( 'contenidos/servicios/editar.php'); break;
+            case 'eliminar': include( 'contenidos/servicios/agregar.php'); break;
           endswitch;
         break;
           
