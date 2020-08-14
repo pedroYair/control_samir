@@ -25,7 +25,7 @@
 	$filas = mysqli_affected_rows($cnx);
 
 	// obtenemos la respuesta ante la inserción
-	$_SESSION['resp']  = $filas >= 1 ? 'ok' : 'error';
+	$_SESSION['resp']  = $filas >= 1 ? 'ok_agregar' : 'error_agregar';
 
 	header("Location: ../../index.php?seccion=servicios&accion=listar" );
 

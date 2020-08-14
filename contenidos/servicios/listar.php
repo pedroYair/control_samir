@@ -3,16 +3,11 @@
 	$consulta = "SELECT * FROM servicios ORDER BY SERVICIO";
   $exc = mysqli_query($cnx, $consulta);
   
-  // obtengo mensaje de insercion de servicios
-  $mensaje = "";
-  if( isset( $_SESSION['resp'] ) ){
-    if( $_SESSION['resp'] == 'ok' ){
-      $clase = 'ok';
-      $mensaje = 'Servicio agregado satisfactoriamente';
-    }else{
-      $clase = 'error';
-      $mensaje = 'El servicio no pudo ser registrado, posiblemente ya esta registrado en el sistema';
-    }
+  // obtengo mensaje de insercion, actualizacion o eliminacion de servicios
+  $resp = "";
+  if(isset( $_SESSION['resp'] ))
+  {
+    $resp = $_SESSION['resp'];
     unset( $_SESSION['resp'] );
   }
 ?>
@@ -27,9 +22,9 @@
             <div class="box-body">
 
             <?php
-                if($mensaje != "")
+                if($resp != "")
                 {
-                  echo "<p class='$clase' style='border-color:red;'>$mensaje</p>";
+                  include("mensajes.php");
                 }
             ?>
 
