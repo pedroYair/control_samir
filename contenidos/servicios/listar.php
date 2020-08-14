@@ -29,12 +29,12 @@
             ?>
 
               <div class="form-group">
-                    <div class="col-md-offset-2 col-md-8" style="margin-left:1px;"s>
-                        <a class="btn btn-primary" href="index.php?seccion=servicios&accion=agregar" title="Agregar servicio"><i class="fa fa-plus"></i> Agregar</a>
+                    <div class="col-md-offset-2 col-md-8" style="margin-left:0px;">
+                        <a class="btn btn-primary" href="index.php?seccion=servicios&accion=agregar" title="Agregar servicio" style="margin:10px;"><i class="fa fa-plus"></i> Agregar</a>
                     </div>
               </div>
 
-              <table id="example2" class="table table-bordered table-hover">
+              <table id="tabla_registros" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                   <th>#</th>
@@ -59,7 +59,7 @@
 							  <td>$columnas[OBSERVACION]</td>
                 <td>
                   <a class="btn btn-warning .edit" href="index.php?seccion=servicios&accion=editar&id=$columnas[ID]" title="Editar"><i class="fa fa-pencil"></i></a>
-                  <a class="btn btn-danger delete" href="../../accionesForms/servicios/eliminar.php?id=$columnas[ID]" onclick="return confirm('¿Eliminar este servicio?')" title="Eliminar"><i class="fa fa-trash"></i></a>
+                  <a class="btn btn-danger delete" href="accionesForms/servicios/eliminar.php?id=$columnas[ID]" onclick="return confirm('¿Eliminar el servicio $columnas[SERVICIO]?')" title="Eliminar"><i class="fa fa-trash"></i></a>
                 </td>
 							</tr>
 fila;

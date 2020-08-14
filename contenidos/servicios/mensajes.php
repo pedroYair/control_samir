@@ -19,6 +19,16 @@
   El servicio no pudo ser actualizado, posiblemente el nombre de servicio colocado ya esté registrado.
   </div>";
 
+  $mensaje_eliminar_ok = "<div class='alert alert-success alert-dismissible'>
+  <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+  Servicio eliminado satisfactoriamente.
+  </div>";
+
+  $mensaje_editar_error = "<div class='alert alert-danger alert-dismissible'>
+  <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+  El servicio no pudo ser eliminado.
+  </div>";
+
   echo "<div class='box-body'>";
 
   switch($resp)
@@ -37,6 +47,14 @@
 
     case 'error_editar':
       echo $mensaje_editar_error;
+    break;
+
+    case 'ok_eliminar': 
+      echo $mensaje_eliminar_ok;
+    break;
+
+    case 'error_eliminar':
+      echo $mensaje_eliminar_error;
     break;
 
   }

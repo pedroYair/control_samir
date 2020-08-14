@@ -207,9 +207,9 @@ TABLES;
 <!-- page script -->
 <script>
   $(function () {
-    $('#example2').DataTable({
+    $('#tabla_registros').DataTable({
       'paging'      : true,
-      'lengthChange': false,
+      'lengthChange': true,
       'searching'   : true,
       'ordering'    : true,
       'info'        : true,
