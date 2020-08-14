@@ -103,11 +103,19 @@ TABLES;
             case 'listar': include( 'contenidos/servicios/listar.php'); break;
             case 'agregar': include( 'contenidos/servicios/agregar.php'); break;
             case 'editar': include( 'contenidos/servicios/editar.php'); break;
-            case 'eliminar': include( 'contenidos/servicios/agregar.php'); break;
           endswitch;
         break;
           
-				case 'categoria': include( 'contenidos/categoria.php' ); break;
+        case 'deudores': 
+          $accion = $_GET['accion'];
+
+          switch( $accion ):
+            case 'listar': include( 'contenidos/deudores/listar.php'); break;
+            case 'agregar': include( 'contenidos/deudores/agregar.php'); break;
+            case 'editar': include( 'contenidos/deudores/editar.php'); break;
+          endswitch;
+        break;
+
 				case 'registro': include( 'contenidos/registro.php' ); break;
 				case 'contrasenia' : include( 'contenidos/recuperar.php' ); break;
 				case 'perfil': include( 'contenidos/perfil.php'); break;
@@ -207,6 +215,7 @@ TABLES;
 <!-- page script -->
 <script>
   $(function () {
+    $('#tabla_deudores').DataTable()
     $('#tabla_registros').DataTable({
       'paging'      : true,
       'lengthChange': true,
