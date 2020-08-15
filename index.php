@@ -122,10 +122,18 @@ TABLES;
           switch( $accion ):
             case 'listar': include( 'contenidos/deudas/listar.php'); break;
             case 'agregar': include( 'contenidos/deudas/agregar.php'); break;
+            // ver lista de detalles de deudas y abonos (separados por pestañas)
+            case 'ver': include( 'contenidos/deudas/ver.php'); break;
+          endswitch;
+        break;
+        case 'detalle_deudas':
+          $accion = $_GET['accion'];
+
+          switch( $accion ):
+            case 'agregar': include( 'contenidos/detalle_deudas/agregar.php'); break;
             case 'editar': include( 'contenidos/deudas/editar.php'); break;
           endswitch;
         break;
-				case 'contrasenia' : include( 'contenidos/recuperar.php' ); break;
 				case 'perfil': include( 'contenidos/perfil.php'); break;
 				case 'contacto': include( 'contenidos/contacto.php'); break;
 				case 'gracias': include( 'contenidos/gracias.php'); break;

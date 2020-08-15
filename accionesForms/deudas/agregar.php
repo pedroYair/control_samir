@@ -27,13 +27,13 @@
 	if($filas >= 1)
 	{
 		$_SESSION['id_insertado'] = mysqli_insert_id($cnx);
-		$_SESSION['resp'] = 'ok_agregar';
+		$_SESSION['resp'] = 'ok_agregar_deuda';
 	}
 	else
 	{
-		$_SESSION['resp'] = 'error_agregar';
+		$_SESSION['resp'] = 'error_agregar_deuda';
 	}
 
-	header("Location: ../../index.php?seccion=deudas&accion=listar" );
+	header("Location: ../../index.php?seccion=detalle_deudas&accion=agregar" );
 
 ?>
