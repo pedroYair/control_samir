@@ -11,7 +11,7 @@
 
   $mensaje_editar_ok = "<div class='alert alert-success alert-dismissible'>
   <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-  Deudor actualizazo satisfactoriamente.
+  Deudor actualizado satisfactoriamente.
   </div>";
 
   $mensaje_editar_error = "<div class='alert alert-danger alert-dismissible'>

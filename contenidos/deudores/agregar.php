@@ -10,7 +10,7 @@
 
                 <!-- text input -->
                 <div class="form-group">
-                  <label>Servicio</label>
+                  <label>Nombre deudor</label>
                   <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre deudor" required>
                 </div>
 

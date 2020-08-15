@@ -10,9 +10,9 @@
 			die("Error en la solicitud");
 		}
 	
-		$id_servicio = $_GET['id'];
+		$id_deudor = $_GET['id'];
 		
-		$sql = "DELETE FROM servicios WHERE ID = '$id_servicio' LIMIT 1";
+		$sql = "DELETE FROM deudor WHERE ID = '$id_deudor' LIMIT 1";
 		
 		$resp = mysqli_query($cnx, $sql);
 
@@ -24,6 +24,6 @@
 	}
 	
 	// regresando a la pagina principal
-	header("Location: ../../index.php?seccion=servicios&accion=listar" );
+	header("Location: ../../index.php?seccion=deudores&accion=listar" );
 	
 ?>

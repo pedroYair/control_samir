@@ -20,7 +20,7 @@
 			FECHA_ALTA = NOW(),
 			OBSERVACION = '$obs',
 			FOTO= LOAD_FILE('$imagen'),
-			ESTADO= 1";
+			ESTADO= '1'";
 	
 	$f = mysqli_query($cnx, $c);
 	

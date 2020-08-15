@@ -1,15 +1,16 @@
 <?php
 
-  $servicio = "";
-  $precio = "";
+  $nombre = "";
+  $estado = "";
   $obs = "";
+  $foto = "";
   $id = "";
 
   if(isset($_GET['id']))
   {
     $id = $_GET['id'];
 
-    $c = "SELECT * FROM servicios WHERE id= '$id' LIMIT 1";
+    $c = "SELECT NOMBRE, ESTADO, OBSERVACION, FOTO FROM deudor WHERE id= '$id' LIMIT 1";
 
     $fila = mysqli_query($cnx, $c);
 
@@ -17,15 +18,16 @@
 
     if($fila)
     {
-      $servicio = $fila['SERVICIO'];
-      $precio = $fila['PRECIO'];
+      $nombre = $fila['NOMBRE'];
+      $estado = $fila['ESTADO'];
       $obs = $fila['OBSERVACION'];
+      $foto = $fila['FOTO'];
     }
     else
     {
       $mensaje_error = "<div class='alert alert-danger alert-dismissible'>
       <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-      El servicio solicitado no se encuentra registrado en el sistema.
+      El deudor solicitado no se encuentra registrado en el sistema.
       </div>";
     }
   }
@@ -36,30 +38,33 @@
 <!-- general form elements disabled -->
 <div class="box box-warning">
             <div class="box-header with-border">
-              <h3 class="box-title">Editar servicio</h3>
+              <h3 class="box-title">Editar deudor</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <?php
 
-                if($servicio == "")
+                if($nombre == "")
                 {
                   echo $mensaje_error;
                 }
 
               ?>
 
-              <form role="form" action="accionesForms/servicios/editar.php" method="post">
+              <form role="form" action="accionesForms/deudores/editar.php" method="post" enctype="multipart/form-data">
 
                 <!-- text input -->
                 <div class="form-group">
-                  <label>Servicio</label>
-                  <input id="servicio" name="servicio" type="text" class="form-control" value="<?php echo $servicio; ?>" required>
+                  <label>Nombre</label>
+                  <input id="nombre" name="nombre" type="text" class="form-control" value="<?php echo $nombre; ?>" required>
                 </div>
 
                 <div class="form-group">
-                  <label>Precio</label>
-                  <input id="precio" name="precio" type="text" class="form-control" value="<?php echo $precio; ?>">
+                  <label>Estado</label>
+                  <select name="estado" class="form-control">
+                    <option value="1" <?php if($estado == 1){ echo 'selected';} ?>>Activo</option>
+                    <option value="0" <?php if($estado == 0){ echo 'selected';} ?>>Innactivo</option>
+                </select>
                 </div>
                 
                 <!-- textarea -->
@@ -68,13 +73,25 @@
                   <textarea id="obs" name="observacion" class="form-control" rows="3"><?php echo $obs; ?></textarea>
                 </div>
 
+                <div class="form-group">
+                  <label>Foto(se muestra la foto actualmente registrada en el sistema)</label>
+                  <br/>
+                  <?php
+                    if($foto)
+                    {
+                      echo '<img src="data:image/jpeg;base64,'.base64_encode( $foto ).'" width="160" alt="Avatar actual"/>';
+                    }
+                  ?>
+                  <input name="foto" type="file" class="form-control">
+                </div>
+
                 <input type="hidden" name="id" value="<?php echo $id; ?>">
             </div>
 
             <div class="box-footer">
-                <a href="index.php?seccion=servicios&accion=listar" style="width: 73px; height: 34px;" class="btn btn-success ancho_botones">Atrás</a>
+                <a href="index.php?seccion=deudores&accion=listar" style="width: 73px; height: 34px;" class="btn btn-success ancho_botones">Atrás</a>
                 <?php
-                if($servicio != "")
+                if($nombre != "")
                 {
                   echo "<button type='submit' style='height: 34px;' class='btn btn-primary'>Guardar</button>";
                 }

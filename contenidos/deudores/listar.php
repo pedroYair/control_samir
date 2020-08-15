@@ -51,10 +51,12 @@
 					if($cnx)
 					{
             $contador = 1;
-            $estado = "<a class='btn btn-sm btn-success' title='Habilitado'><i class='fa fa-check'></i></a>";
+            
 						while($columnas = mysqli_fetch_assoc($exc))
 						{
-              if($columnas['ESTADO'] == 0)
+              $estado = "<a class='btn btn-sm btn-success' title='Habilitado'><i class='fa fa-check'></i></a>";
+              
+              if($columnas['ESTADO'] == '0')
               {
                 $estado = "<a class='btn btn-sm btn-danger' title='Inhabilitado'><i class='fa fa-times'></i></a>";
               }
@@ -67,8 +69,8 @@
 							  <td>$columnas[FECHA_ALTA]</td>
 							  <td>$columnas[OBSERVACION]</td>
                 <td>
-                  <a class="btn btn-warning .edit" href="index.php?seccion=servicios&accion=editar&id=$columnas[ID]" title="Editar"><i class="fa fa-pencil"></i></a>
-                  <a class="btn btn-danger delete" href="accionesForms/servicios/eliminar.php?id=$columnas[ID]" onclick="return confirm('¿Eliminar el deudor $columnas[NOMBRE]?')" title="Eliminar"><i class="fa fa-trash"></i></a>
+                  <a class="btn btn-warning .edit" href="index.php?seccion=deudores&accion=editar&id=$columnas[ID]" title="Editar"><i class="fa fa-pencil"></i></a>
+                  <a class="btn btn-danger delete" href="accionesForms/deudores/eliminar.php?id=$columnas[ID]" onclick="return confirm('¿Eliminar el deudor $columnas[NOMBRE]?')" title="Eliminar"><i class="fa fa-trash"></i></a>
                 </td>
 							</tr>
 fila;
