@@ -34,7 +34,7 @@
                     </div>
               </div>
 
-              <table id="tabla_registros" class="table table-bordered table-hover">
+              <table id="listado_registros" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                   <th>#</th>
@@ -75,3 +75,7 @@ fila;
         </div>
     </div>
           <!-- /.box -->
+
+<?php
+  mysqli_free_result($exc);
+?>

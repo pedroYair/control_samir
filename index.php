@@ -116,7 +116,15 @@ TABLES;
           endswitch;
         break;
 
-				case 'registro': include( 'contenidos/registro.php' ); break;
+        case 'deudas':
+          $accion = $_GET['accion'];
+
+          switch( $accion ):
+            case 'listar': include( 'contenidos/deudas/listar.php'); break;
+            case 'agregar': include( 'contenidos/deudas/agregar.php'); break;
+            case 'editar': include( 'contenidos/deudas/editar.php'); break;
+          endswitch;
+        break;
 				case 'contrasenia' : include( 'contenidos/recuperar.php' ); break;
 				case 'perfil': include( 'contenidos/perfil.php'); break;
 				case 'contacto': include( 'contenidos/contacto.php'); break;
@@ -215,12 +223,24 @@ TABLES;
 <!-- page script -->
 <script>
   $(function () {
-    $('#tabla_deudores').DataTable()
-    $('#tabla_registros').DataTable({
+    $('#listado_registros').DataTable({
       'paging'      : true,
       'lengthChange': true,
       'searching'   : true,
       'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
+<script>
+  $(function () {
+    $('#listado_deudas').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'order': [[ 5, "desc" ]],
       'info'        : true,
       'autoWidth'   : false
     })

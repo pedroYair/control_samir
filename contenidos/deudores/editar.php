@@ -64,7 +64,7 @@
                   <select name="estado" class="form-control">
                     <option value="1" <?php if($estado == 1){ echo 'selected';} ?>>Activo</option>
                     <option value="0" <?php if($estado == 0){ echo 'selected';} ?>>Innactivo</option>
-                </select>
+                  </select>
                 </div>
                 
                 <!-- textarea -->
