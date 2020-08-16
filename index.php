@@ -44,12 +44,15 @@ include( 'setup/configuracion.php' );
 
   <?php
   
-	if(isset($_GET['accion']) and $_GET['accion'] == "listar" or $_GET['accion'] == "ver_historial")
+	if(isset($_GET['accion']))
 	{
-		echo <<<TABLES
-	<!-- DataTables -->
-  <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    if($_GET['accion'] == "listar" or $_GET['accion'] == "ver_historial")
+    {
+      echo <<<TABLES
+    <!-- DataTables -->
+    <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 TABLES;
+    }
 	}
   
   ?>
@@ -131,7 +134,7 @@ TABLES;
 
           switch( $accion ):
             case 'agregar': include( 'contenidos/detalle_deudas/agregar.php'); break;
-            case 'editar': include( 'contenidos/deudas/editar.php'); break;
+            case 'ver': include( 'contenidos/detalle_deudas/listar.php'); break;
           endswitch;
         break;
 				case 'perfil': include( 'contenidos/perfil.php'); break;

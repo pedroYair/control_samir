@@ -1,7 +1,7 @@
 <?php
   $mensaje_agregar_deuda_ok = "<div class='alert alert-success alert-dismissible'>
   <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-  Deuda registra satisfactoriamente. Proceda a agregar el detalle de deudasss.
+  Deuda registra satisfactoriamente. Proceda a agregar el detalle de deuda.
   </div>";
 
   $mensaje_agregar_deuda_error = "<div class='alert alert-danger alert-dismissible'>

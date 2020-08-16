@@ -5,7 +5,6 @@
 		$id_servicio = $_POST['servicio'];
 		$cantidad = $_POST['cantidad'];
 		$subtotal = $_POST['subtotal'];
-		$obs = $_POST['observacion'];
 	}
 
 	include( '../../setup/configuracion.php' );
@@ -20,8 +19,7 @@
 			SET FK_DEUDA = '$id_deuda',
 			FK_SERVICIO = '$id_servicio',
 			CANTIDAD = '$cantidad',
-			SUBTOTAL = '$subtotal',
-			OBSERVACION = '$obs'";
+			SUBTOTAL = '$subtotal'";
 	
 	$f = mysqli_query($cnx, $c);
 	

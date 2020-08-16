@@ -44,11 +44,6 @@ SERVICIO;
 									  <input type="number" name="cantidad" min="1" class="form-control" placeholder="(Opcional)">
 									</div>
 
-									<div class="form-group">
-									  <label>Observación</label>
-									  <textarea name="observacion" class="form-control" rows="1" placeholder="(Opcional)"></textarea>
-									</div>
-
 									<input type="hidden" name="id_deuda" value="<?php echo $id_deuda_insertada;?>">
 								
 
