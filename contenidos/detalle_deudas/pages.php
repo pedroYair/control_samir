@@ -1,6 +1,6 @@
 <?php
   
-	$consulta4 = "SELECT d.ID AS ID_DD, s.ID AS ID_SER, SERVICIO, SUM(SUBTOTAL) AS SERVICIO_TOTAL, SUM(CANTIDAD) AS CANTIDAD_TOTAL 
+	$consulta4 = "SELECT s.ID AS ID_SER, SERVICIO, SUM(SUBTOTAL) AS SERVICIO_TOTAL, SUM(CANTIDAD) AS CANTIDAD_TOTAL 
 					FROM detalle_deuda AS d JOIN servicios AS s ON d.FK_SERVICIO = s.ID
 					WHERE d.FK_DEUDA = '$id_deuda_insertada' 
 					GROUP BY FK_SERVICIO 
@@ -14,9 +14,6 @@
 						<div class="col-md-6">
 						  <!-- Custom Tabs -->
 						  <div class="nav-tabs-custom">
-							<ul class="nav nav-tabs">
-							  <li class="active"><a href="#tab_1" data-toggle="tab">Agregar detalle de deuda</a></li>
-							</ul>
 							<div class="tab-content">
 							  <div class="tab-pane active" id="tab_1">
 								
@@ -39,7 +36,7 @@ SERVICIO;
 
 									<div class="form-group">
 									  <label>Subtotal</label>
-									  <input type="number" name="subtotal" min="50" step="50" class="form-control">
+									  <input type="number" name="subtotal" min="50" step="50" max="<?php $maximo = $deuda['TOTAL'] - $subtotal_agregado; echo $maximo;?>" class="form-control">
 									</div>
 
 									<div class="form-group">
@@ -49,10 +46,10 @@ SERVICIO;
 
 									<div class="form-group">
 									  <label>Observación</label>
-									  <textarea name="observacion" class="form-control" rows="2" placeholder="(Opcional)"></textarea>
+									  <textarea name="observacion" class="form-control" rows="1" placeholder="(Opcional)"></textarea>
 									</div>
 
-									<input type="hidden" name="id_deuda" value="<?php echo $id_deuda_insertada; ?>">
+									<input type="hidden" name="id_deuda" value="<?php echo $id_deuda_insertada;?>">
 								
 
 								<div class="box-footer">
@@ -115,7 +112,7 @@ SERVICIO;
 												<td>$columnas[CANTIDAD_TOTAL]</td>
 												<td>$columnas[SERVICIO_TOTAL]</td>
 												<td>
-													<a class="btn btn-danger delete" href="accionesForms/detalle_deudas/eliminar.php?id1=$columnas[ID_DD]&id2=$columnas[ID_SER]" onclick="return confirm('¿Eliminar el servicio $columnas[SERVICIO] del detalle?')" title="Eliminar"><i class="fa fa-trash"></i></a>
+													<a class="btn btn-danger delete" href="accionesForms/detalle_deudas/eliminar.php?id1=$id_deuda_insertada&id2=$columnas[ID_SER]" onclick="return confirm('¿Eliminar el servicio $columnas[SERVICIO] del detalle?')" title="Eliminar"><i class="fa fa-trash"></i></a>
 												</td>
 												</tr>
 fila;

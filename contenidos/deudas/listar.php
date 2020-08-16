@@ -3,8 +3,6 @@
 	$consulta = "SELECT b.ID, NOMBRE, ESTADO, sum(TOTAL) AS TOTAL_DEUDAS FROM deuda AS a JOIN deudor AS b ON a.FK_DEUDOR = b.ID GROUP BY b.ID";
   $exc = mysqli_query($cnx, $consulta);
   
-
-  // obtengo mensaje de insercion o eliminacion de deudas
   $resp = "";
   if(isset( $_SESSION['resp'] ))
   {
@@ -15,8 +13,10 @@
   if(isset($_GET['estado']) and isset($_SESSION['id_insertado']))
   {
     unset($_SESSION['id_insertado']);
+    $resp = "ok_fin";
   }
 
+  
 ?>
 
 	<div class="row">

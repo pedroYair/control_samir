@@ -1,5 +1,5 @@
 <?php
-	if(isset($_GET['id']))
+	if(isset($_GET['id1']) and isset($_GET['id2']))
 	{
 		// incluimos la conexion a la bd
 		include("../../setup/configuracion.php");
@@ -10,9 +10,10 @@
 			die("Error en la solicitud");
 		}
 	
-		$id_deudor = $_GET['id'];
+		$id_deuda = $_GET['id1'];
+		$id_servicio = $_GET['id2'];
 		
-		$sql = "DELETE FROM deudor WHERE ID = '$id_deudor' LIMIT 1";
+		$sql = "DELETE FROM detalle_deuda WHERE FK_DEUDA = '$id_deuda' AND FK_SERVICIO = '$id_servicio'";
 		
 		$resp = mysqli_query($cnx, $sql);
 
@@ -24,6 +25,6 @@
 	}
 	
 	// regresando a la pagina principal
-	header("Location: ../../index.php?seccion=deudores&accion=listar" );
+	header("Location: ../../index.php?seccion=detalle_deudas&accion=agregar" );
 	
 ?>
