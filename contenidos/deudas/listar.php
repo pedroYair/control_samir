@@ -11,6 +11,12 @@
     $resp = $_SESSION['resp'];
     unset( $_SESSION['resp'] );
   }
+
+  if(isset($_GET['estado']) and isset($_SESSION['id_insertado']))
+  {
+    unset($_SESSION['id_insertado']);
+  }
+
 ?>
 
 	<div class="row">

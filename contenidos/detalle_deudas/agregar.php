@@ -49,59 +49,25 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            
-            <?php
-                if($resp != "")
-                {
-                  include("mensajes.php");
-                }
+				<?php
+					if($resp != "")
+					{
+					  include("mensajes.php");
+					}
 
-                if($deuda)
-                {
-                  include("small_boxes.php");
-                }
-            ?>
-            
-
-              <form role="form" action="accionesForms/detalle_deudas/agregar.php" method="post">
-
-                <!-- text input -->
-                <div class="form-group">
-                  <label>Servicio</label>
-                  <select name="servicio" class="form-control">
-                  <?php
-                    while($servicio = mysqli_fetch_assoc($exc2))
-                    {
-                      echo <<<SERVICIO
-                      <option value="$servicio[ID]">$servicio[SERVICIO]</option>
-SERVICIO;
-                    }
-                  ?>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label>Subtotal</label>
-                  <input type="number" name="subtotal" min="50" step="50" class="form-control">
-                </div>
-
-                <div class="form-group">
-                  <label>Cantidad</label>
-                  <input type="number" name="cantidad" min="1" class="form-control" placeholder="(Opcional)">
-                </div>
-
-                <div class="form-group">
-                  <label>Observación</label>
-                  <textarea name="observacion" class="form-control" rows="2" placeholder="(Opcional)"></textarea>
-                </div>
-
-                <input type="hidden" name="id_deuda" value="<?php echo $id_deuda_insertada; ?>">
-            </div>
-
-            <div class="box-footer">
-                <button type="submit" style="height: 34px;" class="btn btn-primary">Guardar</button>
-            </div>
-              </form>
-          </div>
-            <!-- /.box-body -->
+					if($deuda)
+					{
+					  include("small_boxes.php");
+					  include("pages.php");
+					}
+				?>
+			</div>
 </div>
+<!-- /.box-body -->
+
+<?php
+  mysqli_free_result($exc);
+  mysqli_free_result($exc2);
+  mysqli_free_result($exc3);
+  mysqli_free_result($exc4);
+?>
