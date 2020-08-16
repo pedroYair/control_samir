@@ -93,7 +93,7 @@
 							  <td>$abono</td>
 							  <td>$saldo</td>
                 <td>
-                <a class="btn btn-primary" title="Ver historial de deudas y abonos" href="#"><i class="fa fa-eye"></i></a>
+                <a class="btn btn-primary" title="Ver historial de deudas y abonos" href="index.php?seccion=deudas&accion=ver_historial&id=$columnas[ID]"><i class="fa fa-eye"></i></a>
                 </td>
 							</tr>
 fila;

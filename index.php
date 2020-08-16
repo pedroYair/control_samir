@@ -44,7 +44,7 @@ include( 'setup/configuracion.php' );
 
   <?php
   
-	if(isset($_GET['accion']) and $_GET['accion'] == "listar")
+	if(isset($_GET['accion']) and $_GET['accion'] == "listar" or $_GET['accion'] == "ver_historial")
 	{
 		echo <<<TABLES
 	<!-- DataTables -->
@@ -123,7 +123,7 @@ TABLES;
             case 'listar': include( 'contenidos/deudas/listar.php'); break;
             case 'agregar': include( 'contenidos/deudas/agregar.php'); break;
             // ver lista de detalles de deudas y abonos (separados por pestañas)
-            case 'ver': include( 'contenidos/deudas/ver.php'); break;
+            case 'ver_historial': include( 'contenidos/deudas/historial_deudas_abonos.php'); break;
           endswitch;
         break;
         case 'detalle_deudas':
@@ -222,7 +222,7 @@ TABLES;
 
 <?php
   
-	if(!isset($_GET['accion']) or $_GET['accion'] == "listar")
+	if(!isset($_GET['accion']) or $_GET['accion'] == "listar" or $_GET['accion'] == "ver_historial")
 	{
 		echo <<<TABLES
 <!-- DataTables -->
@@ -231,6 +231,8 @@ TABLES;
 <!-- page script -->
 <script>
   $(function () {
+    $('#listado_historial_deudas').DataTable()
+    $('#listado_historial_abonos').DataTable()
     $('#listado_registros').DataTable({
       'paging'      : true,
       'lengthChange': true,
