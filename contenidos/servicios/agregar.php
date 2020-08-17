@@ -16,7 +16,7 @@
 
                 <div class="form-group">
                   <label>Precio</label>
-                  <input id="precio" name="precio" type="text" class="form-control" placeholder="(Opcional)">
+                  <input id="precio" name="precio" type="number" min="50" class="form-control" placeholder="(Opcional)">
                 </div>
                 
                 <!-- textarea -->

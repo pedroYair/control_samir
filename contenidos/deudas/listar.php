@@ -68,7 +68,7 @@
                 $estado = "<a class='btn btn-sm btn-danger' title='Inhabilitado'><i class='fa fa-times'></i></a>";
               }
 
-              $consulta2 = "SELECT sum(ABONADO) AS TOTAL_ABONADO FROM abonos AS a JOIN deudor AS d ON a.FK_DEUDOR = d.ID WHERE d.ID ='$columnas[ID]'";
+              $consulta2 = "SELECT sum(ABONADO) AS TOTAL_ABONADO FROM abonos WHERE FK_DEUDOR ='$columnas[ID]'";
               $exc2 = mysqli_query($cnx, $consulta2);
               $abono = mysqli_fetch_assoc($exc2);
               
@@ -83,6 +83,12 @@
               }
 
               $saldo = $columnas['TOTAL_DEUDAS'] - $abono;
+
+              $boton_abonar = "<a class='btn btn-primary' href='index.php?seccion=abonos&accion=agregar&id=$columnas[ID]' title='Abonar'><i class='fa fa-plus'></i></a>";
+              if($saldo == 0)
+              {
+                $boton_abonar = "";
+              }
               
 							echo <<<fila
 							<tr id="$columnas[ID]">
@@ -93,6 +99,7 @@
 							  <td>$abono</td>
 							  <td>$saldo</td>
                 <td>
+                $boton_abonar
                 <a class="btn btn-primary" title="Ver historial de deudas y abonos" href="index.php?seccion=deudas&accion=ver_historial&id=$columnas[ID]"><i class="fa fa-eye"></i></a>
                 </td>
 							</tr>

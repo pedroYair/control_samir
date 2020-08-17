@@ -137,12 +137,13 @@ TABLES;
             case 'ver': include( 'contenidos/detalle_deudas/listar.php'); break;
           endswitch;
         break;
-				case 'perfil': include( 'contenidos/perfil.php'); break;
-				case 'contacto': include( 'contenidos/contacto.php'); break;
-				case 'gracias': include( 'contenidos/gracias.php'); break;
-				case 'static': include( 'contenidos/static.php'); break;
-				case 'leer': include( 'contenidos/leer.php'); break;
-				case 'buscar': include( 'contenidos/busqueda.php'); break;
+        case 'abonos':
+          $accion = $_GET['accion'];
+
+          switch( $accion ):
+            case 'agregar': include( 'contenidos/abonos/agregar.php'); break;
+          endswitch;
+        break;
 				case 'error': include( 'contenidos/error_document.php'); break;
 				default: 
 					echo "<p class='error'>La sección solicitada ($seccion), no existe</p>";
