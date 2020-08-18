@@ -45,11 +45,6 @@
 			$c3 = "UPDATE deuda SET TOTAL = '$total_deuda' WHERE ID = '$id_deuda' LIMIT 1";
 			$exc3 = mysqli_query($cnx, $c3);
 		}
-
-		mysqli_free_result($exc2);
-		mysqli_free_result($exc3);
-		mysqli_free_result($exc4);
-		mysqli_free_result($exc5);
 	}
 	
 	// regresando a la pagina principal

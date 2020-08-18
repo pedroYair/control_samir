@@ -5,6 +5,10 @@ $seccion = isset($_GET['seccion']) ? $_GET['seccion']:'home';
 // el archivo de conf incluye la conexion a bd
 include( 'setup/configuracion.php' );
 
+if($seccion != 'detalle_deudas' and isset($_SESSION['id_insertado']))
+{
+    unset($_SESSION['id_insertado']);
+}
 ?>
 
 <!DOCTYPE html>

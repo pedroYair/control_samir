@@ -5,6 +5,11 @@
 		$id_servicio = $_POST['servicio'];
 		$cantidad = $_POST['cantidad'];
 		$subtotal = $_POST['subtotal'];
+
+		if($cantidad == "")
+		{
+			$cantidad = "0";
+		}
 	}
 
 	include( '../../setup/configuracion.php' );

@@ -31,7 +31,7 @@ DEUDOR;
                 </div>
 
                 <div class="form-group">
-                  <input type="hidden" name="total" min="50" step="50" value="0" class="form-control">
+                  <input type="hidden" name="total" min="50" value="0" class="form-control">
                 </div>
 
                 <!-- textarea -->

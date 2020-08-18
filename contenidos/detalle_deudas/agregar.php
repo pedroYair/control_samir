@@ -10,8 +10,6 @@
     $exc = mysqli_query($cnx, $consulta);
     $deuda = mysqli_fetch_assoc($exc);
 
-    // unset($_SESSION['id_insertado']); debe eliminarse cuando se 
-
     $consulta2 = "SELECT ID, SERVICIO FROM servicios ORDER BY SERVICIO";
     $exc2 = mysqli_query($cnx, $consulta2);
 
@@ -54,7 +52,7 @@
 					  include("mensajes.php");
 					}
 
-					if($deuda)
+					if(isset($_SESSION['id_insertado']))
 					{
 					  include("small_boxes.php");
 					  include("pages.php");
@@ -65,8 +63,11 @@
 <!-- /.box-body -->
 
 <?php
-  mysqli_free_result($exc);
-  mysqli_free_result($exc2);
-  mysqli_free_result($exc3);
-  mysqli_free_result($exc4);
+  if(isset($_SESSION['id_insertado']))
+  {
+    mysqli_free_result($exc);
+    mysqli_free_result($exc2);
+    mysqli_free_result($exc3);
+    mysqli_free_result($exc4);
+  }
 ?>

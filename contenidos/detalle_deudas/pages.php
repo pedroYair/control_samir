@@ -35,18 +35,29 @@ SERVICIO;
 
 									<div class="form-group">
 									  <label>Subtotal</label>
-									  <input type="number" name="subtotal" min="50" step="50" class="form-control">
+									  <input type="number" name="subtotal" min="50" step="50" class="form-control" required>
 									</div>
 
 									<div class="form-group">
 									  <label>Cantidad</label>
-									  <input type="number" name="cantidad" min="1" class="form-control" placeholder="(Opcional)">
+									  <input type="number" name="cantidad" min="1" class="form-control" value="1" required>
 									</div>
 
 									<input type="hidden" name="id_deuda" value="<?php echo $id_deuda_insertada;?>">
 								
 									<div class="box-footer">
-									<a href="index.php?seccion=deudas&accion=listar" style="width: 73px; height: 34px;" class="btn btn-success">Atrás</a>
+										<?php
+											$finalizar = "<a href='index.php?seccion=deudas&accion=listar' style='width: 73px; height: 34px;' class='btn btn-success'>Finalizar</a>";
+
+											if($subtotal_agregado > 0)
+											{
+												echo $finalizar;
+											}
+											else
+											{
+												echo "<a href='index.php?seccion=deudas&accion=listar' style='width: 73px; height: 34px;' class='btn btn-success' disabled>Finalizar</a>";
+											}
+										?>
 										<button type="submit" style="height: 34px;" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar</button>
 									</div>
 								  </form>
