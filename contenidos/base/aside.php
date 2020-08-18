@@ -23,7 +23,7 @@
           </a>
         </li>
 		
-		<li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Ventas</span></a></li>
+		<li><a href="#"><i class="fa fa-book"></i> <span>Ventas</span></a></li>
 		
         <li class="treeview">
           <a href="#">
@@ -35,15 +35,14 @@
           <ul class="treeview-menu">
             <li><a href="index.php?seccion=deudores&accion=listar"><i class="fa fa-circle-o"></i> Deudores</a></li>
             <li><a href="index.php?seccion=deudas&accion=listar"><i class="fa fa-circle-o"></i> Lista de deudas</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Abonos</a></li>
           </ul>
         </li>
         
-        <li><a href="https://adminlte.io/docs"><i class="fa fa-money"></i> <span>Excedente</span></a></li>
+        <li><a href="#"><i class="fa fa-money"></i> <span>Excedente</span></a></li>
 		
-        <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Deudas por pagar</span></a></li>
+        <li><a href="#"><i class="fa fa-book"></i> <span>Deudas por pagar</span></a></li>
 		
-        <li><a href="https://adminlte.io/docs"><i class="fa fa-users"></i> <span>Usuarios</span></a></li>
+        <li><a href="#"><i class="fa fa-users"></i> <span>Usuarios</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->

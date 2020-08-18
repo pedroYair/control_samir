@@ -13,10 +13,9 @@
 			FOTO,
 			NIVEL,
 			ESTADO,
-			FECHA_ALTA,
-			DATE_FORMAT( FECHA_ALTA , '%d-%m-%Y %H:%ihs' ) AS FECHA_ESPANIOL
+			FECHA_ALTA
 		FROM 
-			listado_usuarios
+			usuarios
 		WHERE 
 			EMAIL='$email' AND CLAVE='$cl'
 		LIMIT 1";
@@ -26,7 +25,7 @@
 	
 	if($a){
 		// si el login es exitoso creamos el array de sesiones (los indices son creados por uno mismo no tiene que corresponder al de array de los datos)
-		if($a['ESTADO'] == "Activo")
+		if($a['ESTADO'] == 1)
 		{
 			$_SESSION = $a; // se creara una variable de sesion por cada columna que retorne la consulta sql
 		}

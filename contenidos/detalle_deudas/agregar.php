@@ -23,7 +23,6 @@
     $subtotal_agregado = 0;
     if(!is_null($subtotal_query['SUBTOTAL_AGREGADO']))
     {
-      
       $subtotal_agregado = $subtotal_query['SUBTOTAL_AGREGADO'];
     }
 

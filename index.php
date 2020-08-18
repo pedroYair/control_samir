@@ -1,4 +1,5 @@
 <?php 
+
 $seccion = isset($_GET['seccion']) ? $_GET['seccion']:'home';
 
 // el archivo de conf incluye la conexion a bd

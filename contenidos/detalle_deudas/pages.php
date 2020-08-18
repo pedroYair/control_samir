@@ -9,7 +9,6 @@
 
 ?>
 
-
 <div class="row">
 						<div class="col-md-6">
 						  <!-- Custom Tabs -->
@@ -36,7 +35,7 @@ SERVICIO;
 
 									<div class="form-group">
 									  <label>Subtotal</label>
-									  <input type="number" name="subtotal" min="50" step="50" max="<?php $maximo = $deuda['TOTAL'] - $subtotal_agregado; echo $maximo;?>" class="form-control">
+									  <input type="number" name="subtotal" min="50" step="50" class="form-control">
 									</div>
 
 									<div class="form-group">
@@ -46,23 +45,10 @@ SERVICIO;
 
 									<input type="hidden" name="id_deuda" value="<?php echo $id_deuda_insertada;?>">
 								
-
-								<div class="box-footer">
-									<?php
-										if($subtotal_agregado == $deuda['TOTAL'])
-										{
-											// con la varible estado se verifica que se dio finalizar y al volver a la lista de deudas se elimina la variable de sesion
-											echo "<button type='submit' style='height: 34px;' class='btn btn-primary' disabled><i class='fa fa-plus'></i> Agregar</button>";
-											echo "<a href='index.php?seccion=deudas&accion=listar&estado=ok' style='width: 73px; height: 34px; margin-left: 5px;' class='btn btn-success'>Finalizar</a>";
-										}
-										else
-										{
-											echo "<button type='submit' style='height: 34px;' class='btn btn-primary'><i class='fa fa-plus'></i> Agregar</button>";
-											echo "<a href='index.php?seccion=deudas&accion=listar?estado=ok' style='width: 73px; height: 34px; margin-left: 5px;' class='btn btn-success' title='Finalizar registro de detalle' disabled>Finalizar</a>";
-										}
-									?>
-									
-								</div>
+									<div class="box-footer">
+									<a href="index.php?seccion=deudas&accion=listar" style="width: 73px; height: 34px;" class="btn btn-success">Atrás</a>
+										<button type="submit" style="height: 34px;" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar</button>
+									</div>
 								  </form>
 								</div>
 	

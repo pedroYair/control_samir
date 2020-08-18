@@ -24,9 +24,9 @@
   Servicio eliminado del detalle satisfactoriamente.
   </div>";
 
-  $mensaje_eliminar_error = "<div class='alert alert-success alert-dismissible'>
+  $mensaje_eliminar_error = "<div class='alert alert-danger alert-dismissible'>
   <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-  El servicio no pudo ser eliminado del detalle.s
+  El servicio no pudo ser eliminado del detalle de la deuda.
   </div>";
 
 

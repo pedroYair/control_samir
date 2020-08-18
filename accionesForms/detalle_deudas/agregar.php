@@ -29,6 +29,22 @@
 	// obtenemos la respuesta ante la inserción
 	$_SESSION['resp']  = $filas >= 1 ? 'ok_agregar_detalle' : 'error_agregar_detalle';
 
+	// si el detalle fue agregado se actualiza el total de la deuda
+	if($filas >= 1)
+	{
+		$c2 = "SELECT TOTAL FROM deuda WHERE ID = '$id_deuda' LIMIT 1";
+		$exc2 = mysqli_query($cnx, $c2);
+
+		$total_deuda = mysqli_fetch_assoc($exc2);
+
+		$total_deuda = $total_deuda['TOTAL'];
+
+		$total_deuda += $subtotal;
+
+		$c3 = "UPDATE deuda SET TOTAL = '$total_deuda' WHERE ID = '$id_deuda' LIMIT 1";
+		$exc3 = mysqli_query($cnx, $c3);
+	}
+
 	header("Location: ../../index.php?seccion=detalle_deudas&accion=agregar");
 
 ?>

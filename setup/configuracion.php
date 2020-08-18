@@ -11,10 +11,8 @@
     if($cnx)
     {
         mysqli_set_charset( $cnx, 'utf8mb4' );
-        echo "Conectado a la bd $bd";
+        // echo "Conectado a la bd $bd";
     }
-
-    
     session_start();
 
     // verifica que el usuario tenga el nivel de administrador para hacer cambios en el panel de control
