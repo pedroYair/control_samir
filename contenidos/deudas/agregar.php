@@ -18,7 +18,7 @@
                 <!-- text input -->
                 <div class="form-group">
                   <label>Deudor (Solo deudores habilitados)</label>
-                  <select name="deudor" class="form-control">
+                  <select name="deudor" class="form-control select2">
                   <?php
                     while($deudor = mysqli_fetch_assoc($exc))
                     {

@@ -25,6 +25,8 @@ if($seccion != 'detalle_deudas' and isset($_SESSION['id_insertado']))
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -51,13 +53,16 @@ if($seccion != 'detalle_deudas' and isset($_SESSION['id_insertado']))
   
 	if(isset($_GET['accion']))
 	{
-    if($_GET['accion'] == "listar" or $_GET['accion'] == "ver_historial")
-    {
-      echo <<<TABLES
-    <!-- DataTables -->
-    <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+		$accion = $_GET['accion'];
+		
+		// agregamos css de datatables
+		if($accion == "listar" or $accion == "ver_historial")
+		{
+		  echo <<<TABLES
+		<!-- DataTables -->
+		<link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 TABLES;
-    }
+		}
 	}
   
   ?>
@@ -201,6 +206,8 @@ TABLES;
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Select2 -->
+<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 <!-- Morris.js charts -->
 <script src="bower_components/raphael/raphael.min.js"></script>
 <script src="bower_components/morris.js/morris.min.js"></script>
@@ -228,46 +235,57 @@ TABLES;
 <script src="dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+  })
+ </script>
 
 <?php
-  
-	if(!isset($_GET['accion']) or $_GET['accion'] == "listar" or $_GET['accion'] == "ver_historial")
+	
+	if(isset($_GET['accion']))
 	{
-		echo <<<TABLES
-<!-- DataTables -->
-<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<!-- page script -->
-<script>
-  $(function () {
-    $('#listado_historial_deudas').DataTable()
-    $('#listado_historial_abonos').DataTable()
-    $('#listado_registros').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
-    })
-  })
-</script>
-<script>
-  $(function () {
-    $('#listado_deudas').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : true,
-      'order': [[ 5, "desc" ]],
-      'info'        : true,
-      'autoWidth'   : false
-    })
-  })
-</script>
+		$accion = $_GET['accion'];
+		if($accion == "listar" or $accion == "ver_historial")
+		{
+			echo <<<TABLES
+	<!-- DataTables -->
+	<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+	<!-- page script -->
+	<script>
+	  $(function () {
+		$('#listado_historial_deudas').DataTable()
+		$('#listado_historial_abonos').DataTable()
+		$('#listado_registros').DataTable({
+		  'paging'      : true,
+		  'lengthChange': true,
+		  'searching'   : true,
+		  'ordering'    : true,
+		  'info'        : true,
+		  'autoWidth'   : false
+		})
+	  })
+	</script>
+	<script>
+	  $(function () {
+		$('#listado_deudas').DataTable({
+		  'paging'      : true,
+		  'lengthChange': true,
+		  'searching'   : true,
+		  'ordering'    : true,
+		  'order': [[ 5, "desc" ]],
+		  'info'        : true,
+		  'autoWidth'   : false
+		})
+	  })
+	</script>
 TABLES;
+		}
 	}
-  
+
   ?>
+  
 </body>
 </html>

@@ -20,7 +20,7 @@
 
 									<div class="form-group">
 									  <label>Servicio</label>
-									  <select name="servicio" class="form-control">
+									  <select name="servicio" class="form-control select2">
 									  <?php
 										while($servicio = mysqli_fetch_assoc($exc2))
 										{

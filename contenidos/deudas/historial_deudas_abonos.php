@@ -5,7 +5,9 @@
 		$consulta5 = "SELECT * FROM deuda WHERE FK_DEUDOR = '$id_deudor' ORDER BY FECHA_DEUDA DESC";
 		$exc5 = mysqli_query($cnx, $consulta5);
 		
-		$consulta6 = "SELECT * FROM abonos WHERE FK_DEUDOR = '$id_deudor' ORDER BY FECHA_ABONO DESC";
+		$consulta6 = "SELECT FK_DEUDOR, FECHA_ABONO, ABONADO, a.OBSERVACION, s.SERVICIO
+						 FROM abonos AS a JOIN servicios AS s ON a.FK_SERVICIO = s.ID
+							WHERE FK_DEUDOR = '$id_deudor' ORDER BY FECHA_ABONO DESC";
 		$exc6 = mysqli_query($cnx, $consulta6);
 	}
 	
@@ -63,6 +65,7 @@ fila;
                 <tr>
                   <th>#</th>
                   <th>Fecha</th>
+                  <th>Servicio</th>
                   <th>Abonado</th>
                   <th>Observación</th>
                 </tr>
@@ -75,9 +78,10 @@ fila;
 						while($columnas = mysqli_fetch_assoc($exc6))
 						{
 							echo <<<fila
-							<tr id="$columnas[ID]">
+							<tr>
 							  <td>$contador</td>
 							  <td>$columnas[FECHA_ABONO]</td>
+							  <td>$columnas[SERVICIO]</td>
 							  <td>$columnas[ABONADO]</td>
 							  <td>$columnas[OBSERVACION]</td>
 							</tr>
