@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-08-2020 a las 03:37:38
+-- Tiempo de generación: 19-08-2020 a las 04:47:36
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.2.28
 
@@ -31,10 +31,19 @@ SET time_zone = "+00:00";
 CREATE TABLE `abonos` (
   `ID` int(11) NOT NULL,
   `FK_DEUDOR` int(11) NOT NULL,
+  `FK_SERVICIO` int(11) DEFAULT NULL,
   `ABONADO` double NOT NULL,
   `FECHA_ABONO` datetime NOT NULL,
   `OBSERVACION` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `abonos`
+--
+
+INSERT INTO `abonos` (`ID`, `FK_DEUDOR`, `FK_SERVICIO`, `ABONADO`, `FECHA_ABONO`, `OBSERVACION`) VALUES
+(5, 13, 17, 21000, '2020-08-18 20:51:49', ''),
+(6, 13, 19, 19000, '2020-08-18 21:03:04', '');
 
 -- --------------------------------------------------------
 
@@ -49,6 +58,15 @@ CREATE TABLE `detalle_deuda` (
   `CANTIDAD` int(11) DEFAULT NULL,
   `SUBTOTAL` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `detalle_deuda`
+--
+
+INSERT INTO `detalle_deuda` (`ID`, `FK_DEUDA`, `FK_SERVICIO`, `CANTIDAD`, `SUBTOTAL`) VALUES
+(57, 26, 17, 1, 21000),
+(58, 26, 1, 1, 19000),
+(59, 27, 17, 1, 7000);
 
 -- --------------------------------------------------------
 
@@ -77,6 +95,14 @@ CREATE TABLE `deuda` (
   `OBSERVACION` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `deuda`
+--
+
+INSERT INTO `deuda` (`ID`, `FK_DEUDOR`, `TOTAL`, `FECHA_DEUDA`, `OBSERVACION`) VALUES
+(26, 13, 40000, '2020-08-18 20:39:03', ''),
+(27, 14, 7000, '2020-08-18 21:30:37', '');
+
 -- --------------------------------------------------------
 
 --
@@ -91,6 +117,14 @@ CREATE TABLE `deudor` (
   `FOTO` mediumblob DEFAULT NULL,
   `ESTADO` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `deudor`
+--
+
+INSERT INTO `deudor` (`ID`, `NOMBRE`, `FECHA_ALTA`, `OBSERVACION`, `FOTO`, `ESTADO`) VALUES
+(13, 'PADRE', '2020-08-18', '', NULL, 1),
+(14, 'MADRE', '2020-08-18', '', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -115,7 +149,8 @@ INSERT INTO `servicios` (`ID`, `SERVICIO`, `PRECIO`, `OBSERVACION`) VALUES
 (3, 'INTERNET', 0, '500 media hora'),
 (5, 'ESCANERS', 500, '500 por documento, cedula 1000'),
 (17, 'RECARGAS', 0, 'recarga mínima 1000'),
-(18, 'TRANSCRIPCIONES', 1000, '1000 por hoja');
+(18, 'TRANSCRIPCIONES', 1000, '1000 por hoja'),
+(19, 'PAPELERIA', 0, 'Papelería en general');
 
 -- --------------------------------------------------------
 
@@ -166,7 +201,7 @@ CREATE TABLE `ventas` (
 ALTER TABLE `abonos`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `FK_DEUDOR_INDEX` (`FK_DEUDOR`),
-  ADD KEY `FK_DEUDOR_INDEX_AB` (`FK_DEUDOR`);
+  ADD KEY `FK_SERVICIO` (`FK_SERVICIO`);
 
 --
 -- Indices de la tabla `detalle_deuda`
@@ -224,13 +259,13 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `abonos`
 --
 ALTER TABLE `abonos`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_deuda`
 --
 ALTER TABLE `detalle_deuda`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
@@ -242,19 +277,19 @@ ALTER TABLE `detalle_venta`
 -- AUTO_INCREMENT de la tabla `deuda`
 --
 ALTER TABLE `deuda`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `deudor`
 --
 ALTER TABLE `deudor`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -276,7 +311,8 @@ ALTER TABLE `ventas`
 -- Filtros para la tabla `abonos`
 --
 ALTER TABLE `abonos`
-  ADD CONSTRAINT `abonos_ibfk_1` FOREIGN KEY (`FK_DEUDOR`) REFERENCES `deudor` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `abonos_ibfk_1` FOREIGN KEY (`FK_DEUDOR`) REFERENCES `deudor` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `abonos_ibfk_2` FOREIGN KEY (`FK_SERVICIO`) REFERENCES `servicios` (`ID`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `detalle_deuda`
