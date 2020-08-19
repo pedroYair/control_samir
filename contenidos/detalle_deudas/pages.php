@@ -18,7 +18,6 @@
 								
 								<form role="form" action="accionesForms/detalle_deudas/agregar.php" method="post">
 
-									<!-- text input -->
 									<div class="form-group">
 									  <label>Servicio</label>
 									  <select name="servicio" class="form-control">

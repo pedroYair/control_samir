@@ -7,7 +7,7 @@ Abono agregado satisfactoriamente.
 
 $mensaje_agregar_error = "<div class='alert alert-danger alert-dismissible'>
 <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-El abono no pudo ser agregado, posiblemente el nombre de servicio colocado ya esté registrado.
+El abono no pudo ser agregado.
 </div>";
 
   echo "<div class='box-body'>";

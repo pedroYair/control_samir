@@ -3,6 +3,7 @@
 	{
 		$id_deudor = $_POST['id_deudor'];
 		$valor = $_POST['valor'];
+		$servicio = $_POST['servicio'];
 		$observacion = $_POST['observacion'];
 	}
 
@@ -17,6 +18,7 @@
 	$c = "INSERT INTO abonos
 			SET FK_DEUDOR = '$id_deudor',
 			ABONADO = '$valor',
+			FK_SERVICIO = '$servicio',
 			FECHA_ABONO = NOW(),
 			OBSERVACION = '$observacion'";
 	

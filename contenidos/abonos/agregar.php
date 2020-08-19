@@ -17,6 +17,10 @@
     $consulta9 = "SELECT sum(ABONADO) AS TOTAL_ABONADO FROM abonos WHERE FK_DEUDOR ='$deudor[ID]'";
     $exc9 = mysqli_query($cnx, $consulta9);
     $abono = mysqli_fetch_assoc($exc9);
+
+    // obtengo la lista de servicios
+    $consulta_servicios = "SELECT ID, SERVICIO FROM servicios ORDER BY SERVICIO";
+    $exc_ser = mysqli_query($cnx, $consulta_servicios);
               
     if(is_null($abono['TOTAL_ABONADO']))
     {
@@ -77,6 +81,20 @@
                   <input type="number" name="valor" min="50" max="<?php echo $saldo; ?>" class="form-control">
                 </div>
 
+                <div class="form-group">
+									  <label>Servicio</label>
+									  <select name="servicio" class="form-control">
+									  <?php
+										while($servicio = mysqli_fetch_assoc($exc_ser))
+										{
+										  echo <<<SERVICIO
+										  <option value="$servicio[ID]">$servicio[SERVICIO]</option>
+SERVICIO;
+										}
+									  ?>
+									  </select>
+									</div>
+
                 <!-- textarea -->
                 <div class="form-group">
                   <label>Observación</label>
@@ -104,3 +122,10 @@
           </div>
             <!-- /.box-body -->
 </div>
+
+<?php
+  if(isset($_GET['id']))
+  {
+    mysqli_free_result($exc_ser);
+  }
+?>

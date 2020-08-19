@@ -1,4 +1,12 @@
+<?php
+  $nombre_servicio = "RECARGA";
+  $consulta_deuda_recargas = "SELECT SUM(SUBTOTAL) AS TOTAL
+                                FROM detalle_deuda AS d JOIN servicios AS s ON d.FK_SERVICIO = s.ID
+                                 WHERE s.SERVICIO LIKE '%$nombre_servicio%'";
+  $box_resp = mysqli_query($cnx, $consulta_deuda_recargas);
 
+  $total_deuda_rec = mysqli_fetch_assoc($box_resp);
+?>
 <div class="row">
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
@@ -19,7 +27,18 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+              <h3>
+                <?php
+                  if(is_null($total_deuda_rec['TOTAL']))
+                  {
+                    echo "0";
+                  }
+                  else
+                  {
+                    echo $total_deuda_rec['TOTAL'];
+                  }
+                ?>
+              </h3>
 
               <p>Deudas recargas</p>
             </div>
