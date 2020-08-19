@@ -15,8 +15,6 @@
     unset($_SESSION['id_insertado']);
     $resp = "ok_fin";
   }
-
-  
 ?>
 
 	<div class="row">

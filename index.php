@@ -56,7 +56,7 @@ if($seccion != 'detalle_deudas' and isset($_SESSION['id_insertado']))
 		$accion = $_GET['accion'];
 		
 		// agregamos css de datatables
-		if($accion == "listar" or $accion == "ver_historial")
+		if($accion == "listar" or $accion == "ver_historial" or $accion == "hoy")
 		{
 		  echo <<<TABLES
 		<!-- DataTables -->
@@ -145,6 +145,8 @@ TABLES;
           switch( $accion ):
             case 'agregar': include( 'contenidos/detalle_deudas/agregar.php'); break;
             case 'ver': include( 'contenidos/detalle_deudas/listar.php'); break;
+            case 'hoy': include( 'contenidos/detalle_deudas/deudas_abonos_hoy.php'); break;
+            case 'ver_detalle_hoy': include( 'contenidos/detalle_deudas/listar_hoy.php'); break;
           endswitch;
         break;
         case 'abonos':
@@ -152,6 +154,7 @@ TABLES;
 
           switch( $accion ):
             case 'agregar': include( 'contenidos/abonos/agregar.php'); break;
+			case 'ver_abono_hoy': include( 'contenidos/abonos/listar_hoy.php'); break;
           endswitch;
         break;
 				case 'error': include( 'contenidos/error_document.php'); break;
@@ -247,7 +250,7 @@ TABLES;
 	if(isset($_GET['accion']))
 	{
 		$accion = $_GET['accion'];
-		if($accion == "listar" or $accion == "ver_historial")
+		if($accion == "listar" or $accion == "ver_historial" or $accion == "hoy")
 		{
 			echo <<<TABLES
 	<!-- DataTables -->
@@ -257,6 +260,8 @@ TABLES;
 	<script>
 	  $(function () {
 		$('#listado_historial_deudas').DataTable()
+		$('#listado_deudas_hoy').DataTable()
+		$('#listado_abonos_hoy').DataTable()
 		$('#listado_historial_abonos').DataTable()
 		$('#listado_registros').DataTable({
 		  'paging'      : true,

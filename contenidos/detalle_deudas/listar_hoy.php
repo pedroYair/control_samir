@@ -1,22 +1,15 @@
 <?php
-  if(isset($_GET['id2']))
+  if(isset($_GET['id']))
   {
-    //$id_deudor = $_GET['id1'];
-    $id_deuda = $_GET['id2'];
-	
-	$con_deudor = "SELECT FK_DEUDOR FROM deuda WHERE ID = '$id_deuda' LIMIT 1";
-	$exc_deudor = mysqli_query($cnx, $con_deudor);
-	
-	$deudor = mysqli_fetch_assoc($exc_deudor);
-	$deudor = $deudor['FK_DEUDOR'];
+    $id_deuda = $_GET['id'];
 
-    $consulta7 = "SELECT SERVICIO, SUM(SUBTOTAL) AS SERVICIO_TOTAL, SUM(CANTIDAD) AS CANTIDAD_TOTAL 
+    $consulta6 = "SELECT SERVICIO, SUM(SUBTOTAL) AS SERVICIO_TOTAL, SUM(CANTIDAD) AS CANTIDAD_TOTAL 
 					FROM detalle_deuda AS d JOIN servicios AS s ON d.FK_SERVICIO = s.ID
-					WHERE d.FK_DEUDA = '$id_deuda' 
-					GROUP BY FK_SERVICIO 
-          ORDER BY SERVICIO";
+						WHERE d.FK_DEUDA = '$id_deuda' 
+							GROUP BY FK_SERVICIO 
+								ORDER BY SERVICIO";
           
-	$exc7 = mysqli_query($cnx, $consulta7);
+	$exc6 = mysqli_query($cnx, $consulta6);
   }
 	
   $mensaje_error = "<div class='alert alert-danger alert-dismissible'>
@@ -36,7 +29,7 @@
             <div class="box-body">
 
             <?php
-                if(!$exc7)
+                if(is_null($exc6))
                 {
                   echo $mensaje_error;
                 }
@@ -53,21 +46,22 @@
                 </thead>
                 <tbody>
 				<?php
-					if($cnx and !is_null($exc7))
+					if($cnx and !is_null($exc6))
 					{
 						$contador = 1;
-						while($columnas = mysqli_fetch_assoc($exc7))
+						while($columnas = mysqli_fetch_assoc($exc6))
 						{
 							echo <<<fila
 							<tr>
 							  <td>$contador</td>
 							  <td>$columnas[SERVICIO]</td>
-                <td>$columnas[CANTIDAD_TOTAL]</td>
+							  <td>$columnas[CANTIDAD_TOTAL]</td>
 							  <td>$columnas[SERVICIO_TOTAL]</td>
 							</tr>
 fila;
             $contador++;
 						}
+						mysqli_free_result($exc6);
 					}
 				?>
                 </tfoot>
@@ -76,13 +70,9 @@ fila;
             <!-- /.box-body -->
             <div class="box-footer">
               <?php
-                echo "<a href='index.php?seccion=deudas&accion=ver_historial&id=$deudor' style='width: 73px; height: 34px;' class='btn btn-success'>Atrás</a>";
+                echo "<a href='index.php?seccion=detalle_deudas&accion=hoy' style='width: 73px; height: 34px;' class='btn btn-success'>Atrás</a>";
               ?>
-				  </div>
+			</div>
           </div>
         </div>
     </div>
-
-<?php
-  mysqli_free_result($exc7);
-?>

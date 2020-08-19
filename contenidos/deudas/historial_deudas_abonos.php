@@ -10,7 +10,6 @@
 							WHERE FK_DEUDOR = '$id_deudor' ORDER BY FECHA_ABONO DESC";
 		$exc6 = mysqli_query($cnx, $consulta6);
 	}
-	
 ?>
 
 <div class="row">
@@ -47,7 +46,7 @@
 							  <td>$columnas[TOTAL]</td>
 							  <td>$columnas[OBSERVACION]</td>
 							  <td>
-								<a class="btn btn-primary" title="Ver detalle de la venta" href="index.php?seccion=detalle_deudas&accion=ver&id1=$id_deudor&id2=$columnas[ID]"><i class="fa fa-eye"></i></a>
+								<a class="btn btn-primary" title="Ver detalle de la venta" href="index.php?seccion=detalle_deudas&accion=ver&id2=$columnas[ID]"><i class="fa fa-eye"></i></a>
 							  </td>
 							</tr>
 fila;

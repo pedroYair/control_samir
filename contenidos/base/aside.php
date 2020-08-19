@@ -34,7 +34,8 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="index.php?seccion=deudores&accion=listar"><i class="fa fa-circle-o"></i> Deudores</a></li>
-            <li><a href="index.php?seccion=deudas&accion=listar"><i class="fa fa-circle-o"></i> Lista de deudas</a></li>
+            <li><a href="index.php?seccion=deudas&accion=listar"><i class="fa fa-circle-o"></i> Deudas</a></li>
+            <li><a href="index.php?seccion=detalle_deudas&accion=hoy"><i class="fa fa-circle-o"></i> Deudas y abonos hoy</a></li>
           </ul>
         </li>
         
