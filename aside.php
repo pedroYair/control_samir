@@ -23,7 +23,18 @@
           </a>
         </li>
 		
-		<li><a href="#"><i class="fa fa-book"></i> <span>Ventas</span></a></li>
+		<li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Ventas</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="index.php?seccion=ventas_papeleria&accion=listar"><i class="fa fa-circle-o"></i> Papeleria</a></li>
+            <li><a href="index.php?seccion=deudas&accion=listar"><i class="fa fa-circle-o"></i> Recargas</a></li>
+          </ul>
+        </li>
 		
         <li class="treeview">
           <a href="#">

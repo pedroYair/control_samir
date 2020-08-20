@@ -36,7 +36,6 @@ if($seccion != 'detalle_deudas' and isset($_SESSION['id_insertado']))
   <link rel="stylesheet" href="bower_components/morris.js/morris.css">
   <!-- jvectormap -->
   <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">
-  
   <!-- Date Picker -->
   <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- Daterange picker -->
@@ -85,8 +84,8 @@ TABLES;
 	
     if(isset($_SESSION['NIVEL']))
     {
-      include("contenidos/base/header.php");
-      include("contenidos/base/aside.php");
+      include("header.php");
+      include("aside.php");
     }
 
   ?>
@@ -107,61 +106,73 @@ TABLES;
 			if($seccion and isset($_SESSION['NIVEL']))
 			{
 				switch( $seccion ):
-				case 'home': include("contenidos/base/small_boxes.php"); break;
-        case 'servicios': 
+					case 'home': include("small_boxes.php"); break;
+					case 'servicios': 
 
-          $accion = $_GET['accion'];
+					  $accion = $_GET['accion'];
 
-          switch( $accion ):
-            case 'listar': include( 'contenidos/servicios/listar.php'); break;
-            case 'agregar': include( 'contenidos/servicios/agregar.php'); break;
-            case 'editar': include( 'contenidos/servicios/editar.php'); break;
-          endswitch;
-        break;
-          
-        case 'deudores': 
-          $accion = $_GET['accion'];
-
-          switch( $accion ):
-            case 'listar': include( 'contenidos/deudores/listar.php'); break;
-            case 'agregar': include( 'contenidos/deudores/agregar.php'); break;
-            case 'editar': include( 'contenidos/deudores/editar.php'); break;
-          endswitch;
-        break;
-
-        case 'deudas':
-          $accion = $_GET['accion'];
-
-          switch( $accion ):
-            case 'listar': include( 'contenidos/deudas/listar.php'); break;
-            case 'agregar': include( 'contenidos/deudas/agregar.php'); break;
-            // ver lista de detalles de deudas y abonos (separados por pestañas)
-            case 'ver_historial': include( 'contenidos/deudas/historial_deudas_abonos.php'); break;
-          endswitch;
-        break;
-        case 'detalle_deudas':
-          $accion = $_GET['accion'];
-
-          switch( $accion ):
-            case 'agregar': include( 'contenidos/detalle_deudas/agregar.php'); break;
-            case 'ver': include( 'contenidos/detalle_deudas/listar.php'); break;
-            case 'hoy': include( 'contenidos/detalle_deudas/deudas_abonos_hoy.php'); break;
-            case 'ver_detalle_hoy': include( 'contenidos/detalle_deudas/listar_hoy.php'); break;
-          endswitch;
-        break;
-        case 'abonos':
-          $accion = $_GET['accion'];
-
-          switch( $accion ):
-            case 'agregar': include( 'contenidos/abonos/agregar.php'); break;
-			case 'ver_abono_hoy': include( 'contenidos/abonos/listar_hoy.php'); break;
-          endswitch;
-        break;
-				case 'error': include( 'contenidos/error_document.php'); break;
-				default: 
-					echo "<p class='error'>La sección solicitada ($seccion), no existe</p>";
-					include( 'contenidos/home.php' ); 
+					  switch( $accion ):
+						case 'listar': include( 'contenidos/servicios/listar.php'); break;
+						case 'agregar': include( 'contenidos/servicios/agregar.php'); break;
+						case 'editar': include( 'contenidos/servicios/editar.php'); break;
+					  endswitch;
 					break;
+          
+					case 'deudores': 
+					  $accion = $_GET['accion'];
+
+					  switch( $accion ):
+						case 'listar': include( 'contenidos/deudores/listar.php'); break;
+						case 'agregar': include( 'contenidos/deudores/agregar.php'); break;
+						case 'editar': include( 'contenidos/deudores/editar.php'); break;
+					  endswitch;
+					break;
+
+					case 'deudas':
+					  $accion = $_GET['accion'];
+
+					  switch( $accion ):
+						case 'listar': include( 'contenidos/deudas/listar.php'); break;
+						case 'agregar': include( 'contenidos/deudas/agregar.php'); break;
+						// ver lista de detalles de deudas y abonos (separados por pestañas)
+						case 'ver_historial': include( 'contenidos/deudas/historial_deudas_abonos.php'); break;
+					  endswitch;
+					break;
+					
+					case 'detalle_deudas':
+					  $accion = $_GET['accion'];
+
+					  switch( $accion ):
+						case 'agregar': include( 'contenidos/detalle_deudas/agregar.php'); break;
+						case 'ver': include( 'contenidos/detalle_deudas/listar.php'); break;
+						case 'hoy': include( 'contenidos/detalle_deudas/deudas_abonos_hoy.php'); break;
+						case 'ver_detalle_hoy': include( 'contenidos/detalle_deudas/listar_hoy.php'); break;
+					  endswitch;
+					break;
+		
+					case 'abonos':
+					  $accion = $_GET['accion'];
+
+					  switch( $accion ):
+						case 'agregar': include( 'contenidos/abonos/agregar.php'); break;
+						case 'ver_abono_hoy': include( 'contenidos/abonos/listar_hoy.php'); break;
+					  endswitch;
+					break;
+					
+					case 'ventas_papeleria':
+					  $accion = $_GET['accion'];
+
+					  switch( $accion ):
+						case 'listar': include( 'contenidos/ventas_papeleria/listar.php'); break;
+						// case 'ver_abono_hoy': include( 'contenidos/abonos/listar_hoy.php'); break;
+					  endswitch;
+					break;
+					
+					case 'error': include( 'contenidos/error_document.php'); break;
+					default: 
+						echo "<p class='error'>La sección solicitada ($seccion), no existe</p>";
+						include( 'contenidos/home.php' ); 
+						break;
 				endswitch;
 				
 			}
@@ -281,6 +292,19 @@ TABLES;
 		  'searching'   : true,
 		  'ordering'    : true,
 		  'order': [[ 5, "desc" ]],
+		  'info'        : true,
+		  'autoWidth'   : false
+		})
+	  })
+	</script>
+	<script>
+	  $(function () {
+		$('#listado_ventas_papeleria').DataTable({
+		  'paging'      : true,
+		  'lengthChange': true,
+		  'searching'   : true,
+		  'ordering'    : true,
+		  'order': [[ 0, "desc" ]],
 		  'info'        : true,
 		  'autoWidth'   : false
 		})
