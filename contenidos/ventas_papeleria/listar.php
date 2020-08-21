@@ -85,36 +85,19 @@
 					{
 						while($columnas = mysqli_fetch_assoc($exc))
 						{
-							/*
-						  $consulta2 = "SELECT sum(ABONADO) AS TOTAL_ABONADO FROM abonos WHERE FK_DEUDOR ='$columnas[ID]'";
-						  $exc2 = mysqli_query($cnx, $consulta2);
-						  $abono = mysqli_fetch_assoc($exc2);
-						  
-						  if(is_null($abono['TOTAL_ABONADO']))
-						  {
-							$abono = 0;
-							mysqli_free_result($exc2);
-						  }
-						  else
-						  {
-							$abono = $abono['TOTAL_ABONADO'];
-						  }
-
-						  $saldo = $columnas['TOTAL_DEUDAS'] - $abono;
-						  */
-              
+							
 							echo <<<fila
 							<tr id="$columnas[ID]">
 							  <td>$columnas[FECHA_VENTA]</td>
 							  <td>$columnas[TOTAL_DIA]</td>
 							  <td>$columnas[TOTAL_ESPERADO]</td>
 							  <td>$columnas[TOTAL_REAL]</td>
-							  <td>---</td>
-							  <td>---</td>
-							  <td>---</td>
+							  <td>$columnas[DEUDAS]</td>
+                <td>$columnas[INVERSIONES]</td>
+                <td>$columnas[DEUDAS_CANCEL]</td>
 							  <td>
 								<a class="btn btn-primary" title="Ver detalle de venta" href="index.php?seccion=deudas&accion=ver_historial&id=$columnas[ID]"><i class="fa fa-eye"></i></a>
-                <a class="btn btn-danger delete" href="accionesForms/servicios/eliminar.php?id=$columnas[ID]" onclick="return confirm('¿Eliminar el registro del día $columnas[FECHA_VENTA]?')" title="Eliminar"><i class="fa fa-trash"></i></a>
+                <a class="btn btn-danger delete" href="accionesForms/detalle_ventas/eliminar_venta.php?id=$columnas[ID]" onclick="return confirm('¿Eliminar el registro del día $columnas[FECHA_VENTA]?')" title="Eliminar"><i class="fa fa-trash"></i></a>
 							  </td>
 							</tr>
 fila;

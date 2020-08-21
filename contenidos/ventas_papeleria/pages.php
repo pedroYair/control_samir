@@ -8,8 +8,6 @@
 					GROUP BY FK_SERVICIO 
 					ORDER BY SERVICIO";
   	$exc4 = mysqli_query($cnx, $consulta4);
- 
-
 ?>
 
 <div class="row">
@@ -48,7 +46,9 @@ SERVICIO;
 									<input type="hidden" name="id_venta" value="<?php echo $id_venta_actual;?>">
 								
 									<div class="box-footer">
-										<a href='index.php?seccion=ventas_papeleria&accion=listar&estado=ok' style='width: 73px; height: 34px;' class='btn btn-success'>Finalizar</a>
+										<a href="index.php?seccion=ventas_papeleria&accion=listar" style="width: 73px; height: 34px;" class="btn btn-success">Atrás</a>
+
+										<a href='index.php?seccion=ventas_papeleria&accion=listar&estado=ok' style='width: 73px; height: 34px;' class='btn btn-primary'>Finalizar</a>
 											
 										<button type="submit" style="height: 34px;" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar</button>
 									</div>
