@@ -30,6 +30,16 @@
   Ya existe un registro de ventas para el día en curso. Elimine el registro si desea reiniciar.
   </div>";
 
+  $mensaje_eliminar_venta_ok = "<div class='alert alert-success alert-dismissible'>
+  <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+  La venta ha sido eliminada.
+  </div>";
+
+  $mensaje_eliminar_venta_error = "<div class='alert alert-danger alert-dismissible'>
+  <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+  La venta no pudo ser eliminada.
+  </div>";
+
   echo "<div class='box-body'>";
 
   switch($resp)
@@ -39,8 +49,16 @@
 		break;
 		
 	  case 'error_agregar_venta': 
-      echo $mensaje_agregar_venta_ok;
+      echo $mensaje_agregar_venta_error;
 		break;
+
+    case 'ok_eliminar_venta': 
+      echo $mensaje_eliminar_venta_ok;
+    break;
+    
+    case 'error_eliminar_venta': 
+      echo $mensaje_eliminar_venta_error;
+    break;
 
     case 'registro existente': 
       echo $mensaje_duplicado;
