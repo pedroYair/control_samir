@@ -1,52 +1,117 @@
 <?php
+	
+	$hoy = date('Y-m-d');
+	$caja_anterior = 0;
 
-  $consulta = "SELECT ID, NOMBRE FROM deudor WHERE ESTADO = '1' ORDER BY NOMBRE";
+	//obtenemos el valor de la caja del dia anterrior
+	$ultimo_registro = "SELECT TOTAL_REAL FROM ventas 
+								WHERE ID = (SELECT MAX(ID) FROM ventas WHERE FECHA_VENTA != '$hoy')";
 
-  $exc = mysqli_query($cnx, $consulta);
+	$exc_ultimo = mysqli_query($cnx, $ultimo_registro);
+	$ultimo = mysqli_fetch_assoc($exc_ultimo);
 
+	$caja_anterior = is_null($ultimo['TOTAL_REAL']) ? 0 : $ultimo['TOTAL_REAL'];
+
+	// verificamos que no exista una venta de dia actual
+	
+	$verificar = "SELECT ID, ESTADO FROM ventas WHERE FECHA_VENTA = '$hoy'";
+	$exc_ver = mysqli_query($cnx, $verificar);
+	
+	$actual = mysqli_fetch_assoc($exc_ver);
+	
+	// si no existe el registro se crea
+	$resp = "";
+	if(is_null($actual['ID']))
+	{
+
+		
+		
+		// inserto la nueva venta
+
+		$c_new_venta = "INSERT INTO ventas
+						SET FECHA_VENTA = '$hoy',
+						TOTAL_DIA = '0',
+						TOTAL_ESPERADO = '$caja_anterior',
+						TOTAL_REAL = '0',
+						CAJA_ANTERIOR = '$caja_anterior',
+						ESTADO = '0'";
+	
+		$exc_query = mysqli_query($cnx, $c_new_venta);
+		
+		
+		$filas = mysqli_affected_rows($cnx);
+		
+		$resp  = $filas >= 1 ? 'ok_agregar_venta' : 'error_agregar_venta';
+		
+		if($filas >= 1)
+		{
+			$_SESSION['id_venta'] = mysqli_insert_id($cnx);
+		}
+	}
+	else
+	{
+		if($actual['ESTADO'] == 1)
+		{
+			$resp = "registro existente";
+		}
+		else
+		{
+			$_SESSION['id_venta'] = $actual['ID'];
+		}
+	
+	}
+
+ 
+  if(isset($_SESSION['id_venta']))
+  {
+    $id_venta_actual = $_SESSION['id_venta'];
+
+    // Obtengo los servicios
+    $consulta2 = "SELECT ID, SERVICIO FROM servicios WHERE SERVICIO != 'RECARGAS' ORDER BY SERVICIO";
+    $exc2 = mysqli_query($cnx, $consulta2);
+
+    // obtengo el total del dia
+    $consulta3 = "SELECT SUM(SUBTOTAL) AS TOTAL_DIA FROM detalle_venta WHERE FK_VENTA = '$id_venta_actual'";
+    $exc3 = mysqli_query($cnx, $consulta3);
+    $resp3 = mysqli_fetch_assoc($exc3);
+
+    $total_dia = is_null($resp3['TOTAL_DIA']) ? 0 : $resp3['TOTAL_DIA'];
+
+    // total esperado en caja
+    $total_esperado  = $caja_anterior + $total_dia;
+
+  }
+  else
+  {
+    $mensaje = "No se pudo encontrar el registro de esta deuda";
+  }
+  
 ?>
 
-<!-- general form elements disabled -->
 <div class="box box-warning">
             <div class="box-header with-border">
-              <h3 class="box-title">Agregar deuda</h3>
+              <h3 class="box-title">Agregar detalle de ventas Papeleria</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <form role="form" action="accionesForms/deudas/agregar.php"  method="post">
+				<?php
+					if(isset($_SESSION['resp']))
+					{
+						$resp = $_SESSION['resp'];
+						unset($_SESSION['resp']);
+					}
 
-                <!-- text input -->
-                <div class="form-group">
-                  <label>Deudor (Solo deudores habilitados)</label>
-                  <select name="deudor" class="form-control select2">
-                  <?php
-                    while($deudor = mysqli_fetch_assoc($exc))
-                    {
-                      echo <<<DEUDOR
-                      <option value="$deudor[ID]">$deudor[NOMBRE]</option>
-DEUDOR;
-                    }
-                  ?>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <input type="hidden" name="total" min="50" value="0" class="form-control">
-                </div>
-
-                <!-- textarea -->
-                <div class="form-group">
-                  <label>Observación</label>
-                  <textarea id="obs" name="observacion" class="form-control" rows="3" placeholder="(Opcional)"></textarea>
-                </div>
-               
-            </div>
-
-            <div class="box-footer">
-                <a href="index.php?seccion=deudas&accion=listar" style="width: 73px; height: 34px;" class="btn btn-success">Atrás</a>
-                <button type="submit" style="height: 34px;" class="btn btn-primary">Guardar</button>
-            </div>
-              </form>
-          </div>
-            <!-- /.box-body -->
+					if($resp != "")
+					{
+					  include("mensajes.php");
+					}
+					
+					if(isset($_SESSION['id_venta']))
+					{
+					  include("small_boxes.php");
+					  include("pages.php");
+					}
+				?>
+			</div>
 </div>
+<!-- /.box-body -->

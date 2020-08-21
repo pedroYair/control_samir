@@ -10,14 +10,23 @@
     unset( $_SESSION['resp'] );
   }
 
-  // revisar esto en la lista de deudas al fin como es la eliminacion del indice
-  /*
-  if(isset($_GET['estado']) and isset($_SESSION['id_insertado']))
+
+  // cerramos el registro de ventas del dia actual
+  if(isset($_GET['estado']) and isset($_SESSION['id_venta']))
   {
-    unset($_SESSION['id_insertado']);
-    $resp = "ok_fin";
+    $id = $_SESSION['id_venta'];
+    $update_actual = "UPDATE ventas SET ESTADO = '1' WHERE ID = '$id'";
+    $resp_up = mysqli_query($cnx, $update_actual);
+
+    $filas = mysqli_affected_rows($cnx);
+
+    if($filas >= 1)
+    {
+      unset($_SESSION['id_venta']);
+      $resp = "ok_fin";
+    }
+    
   }
-  */
 ?>
 
 	<div class="row">
@@ -38,7 +47,21 @@
 
               <div class="form-group">
                     <div class="col-md-offset-2 col-md-8" style="margin-left:0px;">
-                        <a class="btn btn-primary" href="index.php?seccion=deudas&accion=agregar" title="Agregar deuda" style="margin:10px;"><i class="fa fa-plus"></i> Agregar</a>
+                      <?php
+                        $hoy = date('Y-m-d');
+                        $verificar = "SELECT ID, ESTADO FROM ventas WHERE FECHA_VENTA = '$hoy'";
+                        $exc_ver = mysqli_query($cnx, $verificar);
+                        $actual = mysqli_fetch_assoc($exc_ver);
+
+                        if(is_null($actual['ID']) or $actual['ESTADO'] == 0)
+                        {
+                          echo "<a class='btn btn-primary' href='index.php?seccion=ventas_papeleria&accion=agregar' title='Agregar ventas papeleria' style='margin:10px;'><i class='fa fa-plus'></i> Agregar</a>";
+                        }
+                        else
+                        {
+                          echo "<a class='btn btn-primary' href='index.php?seccion=ventas_papeleria&accion=agregar' title='Agregar ventas papeleria' style='margin:10px;' disabled><i class='fa fa-plus'></i> Agregar</a>";
+                        }
+                      ?>
                     </div>
               </div>
 
@@ -91,6 +114,7 @@
 							  <td>---</td>
 							  <td>
 								<a class="btn btn-primary" title="Ver detalle de venta" href="index.php?seccion=deudas&accion=ver_historial&id=$columnas[ID]"><i class="fa fa-eye"></i></a>
+                <a class="btn btn-danger delete" href="accionesForms/servicios/eliminar.php?id=$columnas[ID]" onclick="return confirm('¿Eliminar el registro del día $columnas[FECHA_VENTA]?')" title="Eliminar"><i class="fa fa-trash"></i></a>
 							  </td>
 							</tr>
 fila;

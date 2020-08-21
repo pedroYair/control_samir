@@ -79,7 +79,7 @@
                 <p>
                   <small>
                     <?php
-                      echo "Miembro desde"." ".$_SESSION['FECHA_ESPANIOL'];
+                      echo "Miembro desde"." ".$_SESSION['FECHA_ALTA'];
                     ?>
                   </small>
                 </p>
