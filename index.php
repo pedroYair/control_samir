@@ -164,7 +164,15 @@ TABLES;
 
 					  switch( $accion ):
 						case 'listar': include( 'contenidos/ventas_papeleria/listar.php'); break;
-						case 'agregar': include( 'contenidos/ventas_papeleria/agregar.php'); break;
+						case 'agregar': include( 'contenidos/ventas_papeleria/agregar_venta.php'); break;
+					  endswitch;
+					break;
+
+					case 'detalle_ventas':
+					  $accion = $_GET['accion'];
+
+					  switch( $accion ):
+						case 'agregar': include( 'contenidos/detalle_ventas/agregar.php'); break;
 					  endswitch;
 					break;
 					

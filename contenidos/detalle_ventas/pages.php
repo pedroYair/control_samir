@@ -4,7 +4,7 @@
  
 	$consulta4 = "SELECT s.ID AS ID_SER, SERVICIO, SUM(SUBTOTAL) AS SERVICIO_TOTAL, SUM(CANTIDAD) AS CANTIDAD_TOTAL 
 					FROM detalle_venta AS d JOIN servicios AS s ON d.FK_SERVICIO = s.ID
-					WHERE d.FK_VENTA = '$id_venta_actual' 
+					WHERE d.FK_VENTA = '$id_venta' 
 					GROUP BY FK_SERVICIO 
 					ORDER BY SERVICIO";
   	$exc4 = mysqli_query($cnx, $consulta4);
@@ -43,7 +43,7 @@ SERVICIO;
 									  <input type="number" name="cantidad" min="1" class="form-control" value="1" required>
 									</div>
 
-									<input type="hidden" name="id_venta" value="<?php echo $id_venta_actual;?>">
+									<input type="hidden" name="id_venta" value="<?php echo $id_venta;?>">
 								
 									<div class="box-footer">
 										<a href="index.php?seccion=ventas_papeleria&accion=listar" style="width: 73px; height: 34px;" class="btn btn-success">Atrás</a>
@@ -93,7 +93,7 @@ SERVICIO;
 												<td>$columnas[CANTIDAD_TOTAL]</td>
 												<td>$columnas[SERVICIO_TOTAL]</td>
 												<td>
-													<a class="btn btn-danger delete" href="accionesForms/detalle_ventas/eliminar.php?id1=$id_venta_actual&id2=$columnas[ID_SER]" onclick="return confirm('¿Eliminar el servicio $columnas[SERVICIO] del detalle?')" title="Eliminar"><i class="fa fa-trash"></i></a>
+													<a class="btn btn-danger delete" href="accionesForms/detalle_ventas/eliminar.php?id1=$id_venta&id2=$columnas[ID_SER]" onclick="return confirm('¿Eliminar el servicio $columnas[SERVICIO] del detalle?')" title="Eliminar"><i class="fa fa-trash"></i></a>
 												</td>
 												</tr>
 fila;

@@ -13,12 +13,6 @@
 		$id_venta = $_GET['id1'];
 		$id_servicio = $_GET['id2'];
 
-		// obtener servicio
-		$c_servicio = "SELECT SERVICIO FROM servicios WHERE ID = '$id_servicio' LIMIT 1";
-		$exc_servicio = mysqli_query($cnx, $c_servicio);
-		$servicio = mysqli_fetch_assoc($exc_servicio);
-		$servicio = $servicio['SERVICIO'];
-
 		// obtenemos la sumatoria del detalle de deuda ante el servicio que se va a eliminar
 		$c4 = "SELECT SUM(SUBTOTAL) AS SUB_ELIMINAR FROM detalle_venta WHERE FK_VENTA = '$id_venta' AND FK_SERVICIO = '$id_servicio'";
 		$exc4 = mysqli_query($cnx, $c4);
@@ -36,39 +30,14 @@
 		// obtenemos la respuesta ante la eliminacion
 		$_SESSION['resp']  = $filas >= 1 ? 'ok_eliminar' : 'error_eliminar';
 
-		// si el detalle fue agregado se actualiza el total de la deuda
+		// si el detalle fue eliminado se actualiza el total del dia y el total esperado
 		if($filas >= 1)
 		{
-			if($servicio != "CAJA REAL" and $servicio != "INVERSIONES")
-			{
-				$c3 = "UPDATE ventas SET TOTAL_DIA = TOTAL_DIA - '$subtotal_eliminar', TOTAL_ESPERADO = TOTAL_ESPERADO - '$subtotal_eliminar' WHERE ID = '$id_venta' LIMIT 1";
-				$exc3 = mysqli_query($cnx, $c3);
-
-				if($servicio == "DEUDAS CANCELADAS")
-				{
-					$c6 = "UPDATE ventas SET DEUDAS_CANCEL = '0' WHERE ID = '$id_venta' LIMIT 1";
-					$exc6 = mysqli_query($cnx, $c6);
-
-				}
-			}
-			else
-			{
-				if($servicio == "INVERSIONES")
-				{
-					$c4 = "UPDATE ventas SET TOTAL_ESPERADO = TOTAL_ESPERADO - '$subtotal_eliminar', INVERSIONES = '0' WHERE ID = '$id_venta' LIMIT 1";
-					$exc4 = mysqli_query($cnx, $c4);
-				}
-				else
-				{
-					$c5 = "UPDATE ventas SET TOTAL_REAL = '0' WHERE ID = '$id_venta' LIMIT 1";
-					$exc5 = mysqli_query($cnx, $c5);
-				}
-			}
-			
+			$c3 = "UPDATE ventas SET TOTAL_DIA = TOTAL_DIA - '$subtotal_eliminar', TOTAL_ESPERADO = TOTAL_ESPERADO - '$subtotal_eliminar' WHERE ID = '$id_venta' LIMIT 1";
+			$exc3 = mysqli_query($cnx, $c3);
 		}
 	}
 	
-	// regresando a la pagina principal
-	header("Location: ../../index.php?seccion=ventas_papeleria&accion=agregar");
+	header("Location: ../../index.php?seccion=detalle_ventas&accion=agregar&id=$id_venta");
 	
 ?>
