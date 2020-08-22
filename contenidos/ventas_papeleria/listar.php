@@ -9,24 +9,6 @@
     $resp = $_SESSION['resp'];
     unset( $_SESSION['resp'] );
   }
-
-
-  // cerramos el registro de ventas del dia actual
-  if(isset($_GET['estado']) and isset($_SESSION['id_venta']))
-  {
-    $id = $_SESSION['id_venta'];
-    $update_actual = "UPDATE ventas SET ESTADO = '1' WHERE ID = '$id'";
-    $resp_up = mysqli_query($cnx, $update_actual);
-
-    $filas = mysqli_affected_rows($cnx);
-
-    if($filas >= 1)
-    {
-      unset($_SESSION['id_venta']);
-      $resp = "ok_fin";
-    }
-    
-  }
 ?>
 
 	<div class="row">
@@ -55,7 +37,15 @@
 
                         if(is_null($actual['ID']) or $actual['ESTADO'] == 0)
                         {
-                          echo "<a class='btn btn-primary' href='index.php?seccion=ventas_papeleria&accion=agregar' title='Agregar ventas papeleria' style='margin:10px;'><i class='fa fa-plus'></i> Agregar</a>";
+                          if(is_null($actual['ID'])) 
+                          {
+                            echo "<a class='btn btn-primary' href='index.php?seccion=ventas_papeleria&accion=agregar' title='Agregar ventas papeleria' style='margin:10px;'><i class='fa fa-plus'></i> Agregar</a>";
+                          }
+                          else
+                          {
+                            echo "<a class='btn btn-primary' href='index.php?seccion=detalle_ventas&accion=agregar&id=$actual[ID]' title='Agregar ventas papeleria' style='margin:10px;'><i class='fa fa-plus'></i> Agregar</a>";
+                          }
+                          
                         }
                         else
                         {
@@ -97,6 +87,7 @@
                 <td>$columnas[DEUDAS_CANCEL]</td>
 							  <td>
 								<a class="btn btn-primary" title="Ver detalle de venta" href="index.php?seccion=deudas&accion=ver_historial&id=$columnas[ID]"><i class="fa fa-eye"></i></a>
+                <a class="btn btn-warning .edit" href="index.php?seccion=ventas_papeleria&accion=editar&id=$columnas[ID]" title="Editar"><i class="fa fa-pencil"></i></a>
                 <a class="btn btn-danger delete" href="accionesForms/detalle_ventas/eliminar_venta.php?id=$columnas[ID]" onclick="return confirm('¿Eliminar el registro del día $columnas[FECHA_VENTA]?')" title="Eliminar"><i class="fa fa-trash"></i></a>
 							  </td>
 							</tr>

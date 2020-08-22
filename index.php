@@ -165,6 +165,7 @@ TABLES;
 					  switch( $accion ):
 						case 'listar': include( 'contenidos/ventas_papeleria/listar.php'); break;
 						case 'agregar': include( 'contenidos/ventas_papeleria/agregar_venta.php'); break;
+						case 'editar': include( 'contenidos/ventas_papeleria/editar.php'); break;
 					  endswitch;
 					break;
 

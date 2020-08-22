@@ -5,7 +5,8 @@
 		$resp = "";
 		$id_venta = $_GET['id'];
 
-		$c1 = "SELECT ID, CAJA_ANTERIOR, TOTAL_DIA, TOTAL_ESPERADO
+		// obtenemos el registro de la venta
+		$c1 = "SELECT ID, CAJA_ANTERIOR, TOTAL_DIA, TOTAL_ESPERADO, ESTADO
 					FROM ventas
 						WHERE ID = '$id_venta'";
 		$exc1 = mysqli_query($cnx, $c1);
@@ -48,7 +49,7 @@
 					  include("mensajes.php");
 					}
 					
-					if(isset($filas1['ID']))
+					if(isset($filas1['ID']) and $filas1['ESTADO'] == 0)
 					{
 					  include("small_boxes.php");
 					  include("pages.php");

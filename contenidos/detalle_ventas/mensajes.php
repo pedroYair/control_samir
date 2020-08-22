@@ -19,11 +19,6 @@
   <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
   El servicio no pudo ser agregado al detalle de la venta.
   </div>";
-
-   $mensaje_fin = "<div class='alert alert-success alert-dismissible'>
-  <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-  El registro de ventas de papeleria ha sido finalizado. Para realizar cambios elimine el registro.
-  </div>";
   
   $mensaje_duplicado = "<div class='alert alert-danger alert-dismissible'>
   <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
@@ -62,10 +57,6 @@
 
     case 'registro existente': 
       echo $mensaje_duplicado;
-    break;
-
-    case 'ok_fin': 
-      echo $mensaje_fin;
     break;
 
     case 'ok_agregar_detalle': 

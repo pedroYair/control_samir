@@ -48,7 +48,7 @@ SERVICIO;
 									<div class="box-footer">
 										<a href="index.php?seccion=ventas_papeleria&accion=listar" style="width: 73px; height: 34px;" class="btn btn-success">Atrás</a>
 
-										<a href='index.php?seccion=ventas_papeleria&accion=listar&estado=ok' style='width: 73px; height: 34px;' class='btn btn-primary'>Finalizar</a>
+										<a href='index.php?seccion=ventas_papeleria&accion=editar&id=<?php echo $id_venta;?>&estado=ok' style='width: 73px; height: 34px;' class='btn btn-primary'>Finalizar</a>
 											
 										<button type="submit" style="height: 34px;" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar</button>
 									</div>
