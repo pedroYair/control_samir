@@ -12,7 +12,6 @@
 
 		$id_venta = $_GET['id'];
 		
-		// eliminamos todos los detalles del servicio seleccionado
 		$c5 = "DELETE FROM ventas WHERE ID = '$id_venta' LIMIT 1";
 		$exc5 = mysqli_query($cnx, $c5);
 

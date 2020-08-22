@@ -50,7 +50,7 @@
 
                 <div class="form-group">
                   <label>Caja real</label>
-                  <input type="number" name="caja_real" min="0" value="0" class="form-control">
+                  <input type="number" name="caja_real" min="0" value="<?php echo $ultimo['TOTAL_REAL']; ?>" class="form-control">
                 </div>
 
                 <div class="form-group">

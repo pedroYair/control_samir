@@ -86,9 +86,9 @@
                 <td>$columnas[INVERSIONES]</td>
                 <td>$columnas[DEUDAS_CANCEL]</td>
 							  <td>
-								<a class="btn btn-primary" title="Ver detalle de venta" href="index.php?seccion=deudas&accion=ver_historial&id=$columnas[ID]"><i class="fa fa-eye"></i></a>
+								<a class="btn btn-primary" title="Ver detalle de venta" href="index.php?seccion=detalle_ventas&accion=ver_detalle&id=$columnas[ID]"><i class="fa fa-eye"></i></a>
                 <a class="btn btn-warning .edit" href="index.php?seccion=ventas_papeleria&accion=editar&id=$columnas[ID]" title="Editar"><i class="fa fa-pencil"></i></a>
-                <a class="btn btn-danger delete" href="accionesForms/detalle_ventas/eliminar_venta.php?id=$columnas[ID]" onclick="return confirm('¿Eliminar el registro del día $columnas[FECHA_VENTA]?')" title="Eliminar"><i class="fa fa-trash"></i></a>
+                <a class="btn btn-danger delete" href="accionesForms/ventas_papeleria/eliminar.php?id=$columnas[ID]" onclick="return confirm('¿Eliminar el registro del día $columnas[FECHA_VENTA]?')" title="Eliminar"><i class="fa fa-trash"></i></a>
 							  </td>
 							</tr>
 fila;

@@ -174,6 +174,7 @@ TABLES;
 
 					  switch( $accion ):
 						case 'agregar': include( 'contenidos/detalle_ventas/agregar.php'); break;
+						case 'ver_detalle': include( 'contenidos/detalle_ventas/listar_detalle_venta.php'); break;
 					  endswitch;
 					break;
 					
