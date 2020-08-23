@@ -32,7 +32,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="index.php?seccion=ventas_papeleria&accion=listar"><i class="fa fa-circle-o"></i> Papeleria</a></li>
-            <li><a href="index.php?seccion=deudas&accion=listar"><i class="fa fa-circle-o"></i> Recargas</a></li>
+            <li><a href="index.php?seccion=ventas_recargas&accion=listar"><i class="fa fa-circle-o"></i> Recargas</a></li>
           </ul>
         </li>
 		

@@ -177,8 +177,17 @@ TABLES;
 						case 'ver_detalle': include( 'contenidos/detalle_ventas/listar_detalle_venta.php'); break;
 					  endswitch;
 					break;
+
+					case 'ventas_recargas':
+					  $accion = $_GET['accion'];
+
+					  switch( $accion ):
+						case 'listar': include( 'contenidos/ventas_recargas/listar.php'); break;
+						case 'agregar': include( 'contenidos/ventas_recargas/agregar.php'); break;
+						case 'editar': include( 'contenidos/ventas_recargas/editar.php'); break;
+					  endswitch;
+					break;
 					
-					case 'error': include( 'contenidos/error_document.php'); break;
 					default: 
 						echo "<p class='error'>La sección solicitada ($seccion), no existe</p>";
 						include( 'contenidos/home.php' ); 
@@ -309,7 +318,7 @@ TABLES;
 	</script>
 	<script>
 	  $(function () {
-		$('#listado_ventas_papeleria').DataTable({
+		$('#listado_ventas').DataTable({
 		  'paging'      : true,
 		  'lengthChange': true,
 		  'searching'   : true,
