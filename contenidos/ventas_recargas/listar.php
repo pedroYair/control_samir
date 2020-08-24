@@ -52,13 +52,14 @@
                 <thead>
                 <tr>
                   <th>Fecha</th>
-                  <th>Total día</th>
+                  <th>Caja E</th>
+                  <th>Caja R</th>
+                  <th>Deudas C</th>
                   <th>Deudas</th>
                   <th>Inversiones</th>
-                  <th>Deudas canceladas</th>
+                  <th>Saldo esperado</th>
+                  <th>Saldo real</th>
                   <th>Acciones</th>
-                  <th>Total caja esperado</th>
-                  <th>Total caja real</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -72,12 +73,13 @@
 							echo <<<fila
 							<tr id="$columnas[ID]">
 							  <td>$columnas[FECHA]</td>
-							  <td>$columnas[TOTAL_REAL]</td>
+							  <td>$columnas[TOTAL_ESPERADO]</td>
+                <td>$columnas[TOTAL_REAL]</td>
+                <td>$columnas[DEUDAS_CANCEL]</td>
 							  <td>$columnas[DEUDAS]</td>
                 <td>$columnas[INVERSIONES]</td>
-                <td>$columnas[DEUDAS_CANCEL]</td>
-                <td>$columnas[VENTAS_DIA]</td>
-                <td>$columnas[TOTAL_ESPERADO]</td>
+                <td>$columnas[SALDO_CIERRE_ESP]</td>
+                <td>$columnas[SALDO_CIERRE_REAL]</td>
 							  <td>
 								<a class="btn btn-primary" title="Ver detalle de venta" href="index.php?seccion=detalle_ventas&accion=ver_detalle&id=$columnas[ID]"><i class="fa fa-eye"></i></a>
                 <a class="btn btn-warning .edit" href="index.php?seccion=ventas_papeleria&accion=editar&id=$columnas[ID]" title="Editar"><i class="fa fa-pencil"></i></a>
