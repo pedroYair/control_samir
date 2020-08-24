@@ -12,7 +12,7 @@
 
 		$id_venta = $_GET['id'];
 		
-		$c5 = "DELETE FROM ventas WHERE ID = '$id_venta' LIMIT 1";
+		$c5 = "DELETE FROM ventas_recargas WHERE ID = '$id_venta' LIMIT 1";
 		$exc5 = mysqli_query($cnx, $c5);
 
 		// numero de filas afectadas
@@ -23,6 +23,6 @@
 	}
 	
 	// regresando a la pagina principal
-	header("Location: ../../index.php?seccion=ventas_papeleria&accion=listar");
+	header("Location: ../../index.php?seccion=ventas_recargas&accion=listar");
 	
 ?>

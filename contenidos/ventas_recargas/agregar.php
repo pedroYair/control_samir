@@ -1,10 +1,8 @@
 <?php
   
-  $hoy = date('Y-m-d');
-
   //obtenemos el valor de la caja del dia anterior
   $ultimo_registro = "SELECT FECHA, TOTAL_REAL, SALDO_CIERRE_REAL FROM ventas_recargas
-                WHERE ID = (SELECT MAX(ID) FROM ventas_recargas WHERE FECHA != '$hoy')";
+                WHERE ID = (SELECT MAX(ID) FROM ventas_recargas) LIMIT 1";
 
   $exc_ultimo = mysqli_query($cnx, $ultimo_registro);
   $ultimo = mysqli_fetch_assoc($exc_ultimo);
@@ -18,7 +16,7 @@
 <!-- general form elements disabled -->
 <div class="box box-warning">
             <div class="box-header with-border">
-              <h3 class="box-title">Registro de ventas día: <?php echo $hoy; ?></h3>
+              <h3 class="box-title">Registro de ventas recargas</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -30,8 +28,6 @@
                           <label>Fecha control</label>
                           <input id="fecha" type="date" name="fecha" class="form-control" required/>
                     </div>
-
-                    <input type="hidden" name="caja_anterior" value="<?php echo $caja_anterior; ?>" class="form-control">
                   </div>
                 </div>
 
@@ -126,9 +122,17 @@
                   <div class="col-xs-4">
                     <div class="form-group">
                       <label>Total caja real</label>
-                      <input id="total_real" type="number" name="total_real" min="0" value="0" class="form-control">
+                      <input id="total_real" type="number" name="total_real" min="0" value="0" class="form-control" onmouseout="calcular();">
                     </div>
                   </div>
+
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <label>Diferencia totales</label>
+                      <input id="diferencia1" type="number" min="0" value="0" class="form-control" readonly/>
+                    </div>
+                  </div>
+
                 </div>
 
                 <hr/>
@@ -144,9 +148,17 @@
                   <div class="col-xs-4">
                     <div class="form-group">
                       <label>Saldo cierre real</label>
-                      <input id="saldo_cierre_real" type="number" name="saldo_cierre_real" min="0" value="0" class="form-control">
+                      <input id="saldo_cierre_real" type="number" name="saldo_cierre_real" min="0" value="0" class="form-control" onmouseout="calcular();"/>
                     </div>
                   </div>
+
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <label>Diferencia saldos</label>
+                      <input id="diferencia2" type="number" min="0" value="0" class="form-control" readonly/>
+                    </div>
+                  </div>
+
                 </div>
 
                 <hr/>
@@ -209,7 +221,15 @@
     var numero7 = parseInt(document.getElementById("saldo_hoy").value) || 0;
     document.getElementById("saldo_cierre_esp").value = numero7 - numero2;
 
+    // actualizando diferencia totales en caja
+
+    var numero8 = parseInt(document.getElementById("total_real").value) || 0;
+    document.getElementById("diferencia1").value = (ingresos - salidas) - numero8;
+
+    // actualizando diferencia saldos cierre
+
+    var numero9 = parseInt(document.getElementById("saldo_cierre_real").value) || 0;
+    document.getElementById("diferencia2").value = (numero7 - numero2) - numero9;
+
   }
  </script>
-
-// total espera

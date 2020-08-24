@@ -2,17 +2,28 @@
 	if(isset($_POST['id_venta']))
 	{
 		$id_venta = $_POST['id_venta'];
+		$fecha = date('Y-m-d',strtotime($_POST['fecha']));
+
+		$saldo_anterior = $_POST['saldo_anterior'];
+		$recargado = $_POST['recargado'];
+		$saldo_hoy = $_POST['saldo_hoy'];
+
 		$caja_anterior = $_POST['caja_anterior'];
-		$total_dia = $_POST['total_dia'];
-		$total_esperado = $_POST['id_venta'];
+		$ventas_dia = $_POST['ventas_dia'];
+		$deudas_canceladas = $_POST['deudas_canceladas'];
+
 		$deudas = $_POST['deudas'];
 		$inversiones = $_POST['inversiones'];
-		$caja_real = $_POST['caja_real'];
-		$deudas_cancel = $_POST['deudas_cancel'];
+		$perdidas = $_POST['perdidas'];
+
+		$total_esperado = $_POST['total_esperado'];
+		$total_real = $_POST['total_real'];
+		
+		$saldo_cierre_esperado = $_POST['saldo_cierre_esp'];
+		$saldo_cierre_real = $_POST['saldo_cierre_real'];
+
 		$observaciones = $_POST['observacion'];
 		$estado = $_POST['estado'];
-
-		$total_esperado = ($caja_anterior + $total_dia + $deudas_cancel) - $inversiones;
 
 		include( '../../setup/configuracion.php' );
 
@@ -21,16 +32,23 @@
 			die("Error en la solicitud");
 		}
 		
-		// si $servicio es una cadena vacia se coloca null y eso hace que falle el insert
-		$c = "UPDATE ventas SET TOTAL_ESPERADO = '$total_esperado',
-				TOTAL_REAL = '$caja_real',
-				INVERSIONES = '$inversiones',
-				DEUDAS = '$deudas',
-				DEUDAS_CANCEL = '$deudas_cancel',
-				OBSERVACION = '$observaciones',
-				ESTADO = '$estado'
-				WHERE ID='$id_venta'
-				LIMIT 1";
+		$c = "UPDATE ventas_recargas SET SALDO_DIA_ANTERIOR = '$saldo_anterior',
+							RECARGADO = '$recargado',
+							SALDO_HOY = '$saldo_hoy',
+							CAJA_ANTERIOR = '$caja_anterior',
+							VENTAS_DIA = '$ventas_dia',
+							DEUDAS = '$deudas',
+							PERDIDAS = $perdidas,
+							DEUDAS_CANCEL = '$deudas_canceladas',
+							INVERSIONES = '$inversiones',
+							TOTAL_ESPERADO = '$total_esperado',
+							TOTAL_REAL = '$total_real',
+							SALDO_CIERRE_ESP = '$saldo_cierre_esperado',
+							SALDO_CIERRE_REAL = '$saldo_cierre_real',
+							ESTADO = '$estado',
+							OBSERVACION = '$observaciones'
+							WHERE ID='$id_venta' 
+							LIMIT 1";
 		
 		$f = mysqli_query($cnx, $c);
 		echo mysqli_error($cnx);
@@ -41,7 +59,7 @@
 		// obtenemos la respuesta ante la actualizacion
 		$_SESSION['resp']  = $filas >= 1 ? 'ok_editar_venta' : 'error_editar_venta';
 
-		header("Location: ../../index.php?seccion=ventas_papeleria&accion=listar" );
+		header("Location: ../../index.php?seccion=ventas_recargas&accion=listar" );
 	}
 
 	

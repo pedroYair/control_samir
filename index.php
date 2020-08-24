@@ -183,6 +183,7 @@ TABLES;
 						case 'listar': include( 'contenidos/ventas_recargas/listar.php'); break;
 						case 'agregar': include( 'contenidos/ventas_recargas/agregar.php'); break;
 						case 'editar': include( 'contenidos/ventas_recargas/editar.php'); break;
+						case 'ver_detalle': include( 'contenidos/ventas_recargas/detalle.php'); break;
 					  endswitch;
 					break;
 					
