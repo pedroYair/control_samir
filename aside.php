@@ -50,7 +50,7 @@
           </ul>
         </li>
         
-        <li><a href="#"><i class="fa fa-money"></i> <span>Excedente</span></a></li>
+        <li><a href="index.php?seccion=excedente&accion=listar"><i class="fa fa-money"></i> <span>Excedente</span></a></li>
 		
         <li><a href="#"><i class="fa fa-book"></i> <span>Deudas por pagar</span></a></li>
 		
