@@ -82,7 +82,7 @@
                 <td>$columnas[SALDO_CIERRE_ESP]</td>
                 <td>$columnas[SALDO_CIERRE_REAL]</td>
 							  <td>
-								<a class="btn btn-primary" title="Ver detalle de venta" href="index.php?seccion=detalle_ventas&accion=ver_detalle&id=$columnas[ID]"><i class="fa fa-eye"></i></a>
+								<a class="btn btn-primary" title="Ver detalle de venta" href="index.php?seccion=ventas_recargas&accion=ver_detalle&id=$columnas[ID]"><i class="fa fa-eye"></i></a>
                 <a class="btn btn-warning .edit" href="index.php?seccion=ventas_recargas&accion=editar&id=$columnas[ID]" title="Editar"><i class="fa fa-pencil"></i></a>
                 <a class="btn btn-danger delete" href="accionesForms/ventas_recargas/eliminar.php?id=$columnas[ID]" onclick="return confirm('¿Eliminar el registro del día $columnas[FECHA]?')" title="Eliminar"><i class="fa fa-trash"></i></a>
 							  </td>
