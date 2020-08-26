@@ -1,13 +1,13 @@
 <?php 
-
+	$fecha = date('Y-m-d',strtotime($_POST['fecha']));
 	$caja_anterior = $_POST['caja_anterior'];
 	$deudas = $_POST['deudas'];
 	$inversiones = $_POST['inversiones'];
 	$deudas_cancel = $_POST['deudas_cancel'];
+	$total_real = $_POST['total_real'];
 	$observaciones = $_POST['observacion'];
 
 	$total_esperado = ($caja_anterior + $deudas_cancel) - $inversiones;
-	$hoy = date('Y-m-d');
 
 	include( '../../setup/configuracion.php' );
 
@@ -18,7 +18,7 @@
 
 	// verificamos que no exista una venta de dia actual
 	
-	$verificar = "SELECT COUNT(ID) AS CANTIDAD FROM ventas WHERE FECHA_VENTA = '$hoy'";
+	$verificar = "SELECT COUNT(ID) AS CANTIDAD FROM ventas WHERE FECHA_VENTA = '$fecha'";
 	$exc_ver = mysqli_query($cnx, $verificar);
 	$actual = mysqli_fetch_assoc($exc_ver);
 	$cantidad = $actual['CANTIDAD'];
@@ -30,10 +30,10 @@
 
 		// inserto la nueva venta
 		$c_new_venta = "INSERT INTO ventas
-						SET FECHA_VENTA = '$hoy',
+						SET FECHA_VENTA = '$fecha',
 						TOTAL_DIA = '0',
 						TOTAL_ESPERADO = '$total_esperado',
-						TOTAL_REAL = '0',
+						TOTAL_REAL = '$total_real',
 						CAJA_ANTERIOR = '$caja_anterior',
 						INVERSIONES = '$inversiones',
 						DEUDAS = '$deudas',

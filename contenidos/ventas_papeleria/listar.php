@@ -60,11 +60,12 @@
                 <tr>
                   <th>Fecha</th>
                   <th>Total día</th>
-                  <th>Total caja esperado</th>
-                  <th>Total caja real</th>
+                  <th>Total Esp</th>
+                  <th>Total real</th>
                   <th>Deudas</th>
                   <th>Inversiones</th>
-                  <th>Deudas canceladas</th>
+                  <th>Deudas C</th>
+                  <th>Estado</th>
                   <th>Acciones</th>
                 </tr>
                 </thead>
@@ -75,6 +76,13 @@
 					{
 						while($columnas = mysqli_fetch_assoc($exc))
 						{
+
+              $estado = "<a class='btn btn-sm btn-success' title='Registro finalizado'><i class='fa fa-check'></i></a>";
+              
+              if($columnas['ESTADO'] == '0')
+              {
+                $estado = "<a class='btn btn-sm btn-danger' title='Registro sin finalizar'><i class='fa fa-times'></i></a>";
+              }
 							
 							echo <<<fila
 							<tr id="$columnas[ID]">
@@ -85,6 +93,7 @@
 							  <td>$columnas[DEUDAS]</td>
                 <td>$columnas[INVERSIONES]</td>
                 <td>$columnas[DEUDAS_CANCEL]</td>
+                <td>$estado</td>
 							  <td>
 								<a class="btn btn-primary" title="Ver detalle de venta" href="index.php?seccion=detalle_ventas&accion=ver_detalle&id=$columnas[ID]"><i class="fa fa-eye"></i></a>
                 <a class="btn btn-warning .edit" href="index.php?seccion=ventas_papeleria&accion=editar&id=$columnas[ID]" title="Editar"><i class="fa fa-pencil"></i></a>

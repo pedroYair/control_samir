@@ -18,40 +18,76 @@
             <div class="box-body">
               <form role="form" action="accionesForms/ventas_papeleria/editar.php"  method="post">
 
-                <div class="form-group">
-                  <label>Caja día anterior</label>
-                  <input type="number" name="caja_anterior" value="<?php echo $ultimo['CAJA_ANTERIOR']; ?>" class="form-control" readonly>
+                <div class="row">
+                  <div class="col-xs-3">
+                    <div class="form-group">
+                        <div class="form-group">
+                        <label>Caja día anterior</label>
+                        <input id="caja_anterior" type="number" name="caja_anterior" value="<?php echo $ultimo['CAJA_ANTERIOR']; ?>" class="form-control" readonly>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-3">
+                    <div class="form-group">
+                      <label>Total día</label>
+                      <input id="total_dia" type="number" name="total_dia" value="<?php echo $ultimo['TOTAL_DIA']; ?>" class="form-control" readonly>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-xs-3">
+                    <div class="form-group">
+                      <label>Deudas</label>
+                      <input id="deudas" type="number" name="deudas" min="0" value="<?php echo $ultimo['DEUDAS']; ?>" class="form-control" onmouseout="calcular();"/>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-3">
+                    <div class="form-group">
+                      <label>Inversiones</label>
+                      <input id="inversiones" type="number" name="inversiones" min="0" value="<?php echo $ultimo['INVERSIONES']; ?>" class="form-control" onmouseout="calcular();"/>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-3">
+                    <div class="form-group">
+                      <label>Deudas canceladas</label>
+                      <input id="deudas_cancel" type="number" name="deudas_cancel" min="0" value="<?php echo $ultimo['DEUDAS_CANCEL']; ?>" class="form-control" onmouseout="calcular();"/>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-xs-3">
+                    <div class="form-group">
+                        <div class="form-group">
+                          <label>Total esperado</label>
+                          <input id="total_esp" type="number" name="total_esp" min="0" value="<?php echo $ultimo['TOTAL_ESPERADO']; ?>" class="form-control" readonly/>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-3">
+                    <div class="form-group">
+                        <div class="form-group">
+                        <label>Total real</label>
+                        <input id="total_real" type="number" name="total_real" min="0" value="<?php echo $ultimo['TOTAL_REAL']; ?>" class="form-control" onmouseout="calcular();"/>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-3">
+                    <div class="form-group">
+                        <div class="form-group">
+                        <label>Diferencia</label>
+                        <input id="diferencia" type="number" value="0" class="form-control" readonly/>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <div class="form-group">
-                  <label>Total día actual</label>
-                  <input type="number" name="total_dia" value="<?php echo $ultimo['TOTAL_DIA']; ?>" class="form-control" readonly>
-                </div>
-
-                <div class="form-group">
-                  <label>Total esperado día actual</label>
-                  <input type="number" name="total_esperado" value="<?php echo $ultimo['TOTAL_ESPERADO']; ?>" class="form-control" readonly>
-                </div>
-
-                <div class="form-group">
-                  <label>Deudas</label>
-                  <input type="number" name="deudas" min="0" value="<?php echo $ultimo['DEUDAS']; ?>" class="form-control">
-                </div>
-
-                <div class="form-group">
-                  <label>Inversiones</label>
-                  <input type="number" name="inversiones" min="0" value="<?php echo $ultimo['INVERSIONES']; ?>" class="form-control">
-                </div>
-
-                <div class="form-group">
-                  <label>Deudas canceladas</label>
-                  <input type="number" name="deudas_cancel" min="0" value="<?php echo $ultimo['DEUDAS_CANCEL']; ?>" class="form-control">
-                </div>
-
-                <div class="form-group">
-                  <label>Caja real</label>
-                  <input type="number" name="caja_real" min="0" value="<?php echo $ultimo['TOTAL_REAL']; ?>" class="form-control">
-                </div>
 
                 <div class="form-group">
                   <label>Observaciones</label>
@@ -87,3 +123,24 @@
           </div>
             <!-- /.box-body -->
 </div>
+
+<script type="text/javascript">
+
+   function calcular()
+  {
+    var numero1 = parseInt(document.getElementById("caja_anterior").value) || 0;
+    var numero2 = parseInt(document.getElementById("total_dia").value) || 0;
+    var numero3 = parseInt(document.getElementById("deudas_cancel").value) || 0;
+
+    var ingresos = numero1 + numero2 + numero3;
+
+    var salidas = parseInt(document.getElementById("inversiones").value) || 0;
+
+    document.getElementById("total_esp").value = ingresos - salidas;
+
+    // actualizando diferencia totales en caja
+
+    var numero8 = parseInt(document.getElementById("total_real").value) || 0;
+    document.getElementById("diferencia").value = (ingresos - salidas) - numero8;
+  }
+ </script>
