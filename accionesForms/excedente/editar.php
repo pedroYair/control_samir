@@ -1,7 +1,7 @@
 <?php 
-
-	if(isset($_POST['fecha']))
+	if(isset($_POST['id_venta']))
 	{
+		$id_venta = $_POST['id_venta'];
 		$fecha = date('Y-m-d',strtotime($_POST['fecha']));
 
 		$saldo_anterior = $_POST['saldo_anterior'];
@@ -31,47 +31,37 @@
 		{
 			die("Error en la solicitud");
 		}
-
-		// verificamos que no exista una venta de dia actual
 		
-		$verificar = "SELECT COUNT(ID) AS CANTIDAD FROM ventas_recargas WHERE FECHA = '$hoy'";
-		$exc_ver = mysqli_query($cnx, $verificar);
-		$actual = mysqli_fetch_assoc($exc_ver);
-		$cantidad = $actual['CANTIDAD'];
-		
-		// si no existe el registro se crea
-		$resp = "";
-		if($cantidad == 0)
-		{
-
-			// inserto la nueva venta
-			$c_new_venta = "INSERT INTO ventas_recargas
-							SET FECHA = '$fecha',
-							SALDO_DIA_ANTERIOR = '$saldo_anterior',
+		$c = "UPDATE ventas_recargas SET SALDO_DIA_ANTERIOR = '$saldo_anterior',
 							RECARGADO = '$recargado',
 							SALDO_HOY = '$saldo_hoy',
 							CAJA_ANTERIOR = '$caja_anterior',
 							VENTAS_DIA = '$ventas_dia',
 							DEUDAS = '$deudas',
+							PERDIDAS = $perdidas,
 							DEUDAS_CANCEL = '$deudas_canceladas',
 							INVERSIONES = '$inversiones',
-							PERDIDAS = $perdidas,
 							TOTAL_ESPERADO = '$total_esperado',
 							TOTAL_REAL = '$total_real',
 							SALDO_CIERRE_ESP = '$saldo_cierre_esperado',
 							SALDO_CIERRE_REAL = '$saldo_cierre_real',
 							ESTADO = '$estado',
-							OBSERVACION = '$observaciones'";
+							OBSERVACION = '$observaciones'
+							WHERE ID='$id_venta' 
+							LIMIT 1";
 		
-			$exc_query = mysqli_query($cnx, $c_new_venta);
+		$f = mysqli_query($cnx, $c);
+		echo mysqli_error($cnx);
+		
+		// numero de filas afectadas
+		$filas = mysqli_affected_rows($cnx);
 
-			$filas = mysqli_affected_rows($cnx);
-			
-			$_SESSION['resp'] = $filas >= 1 ? 'ok_agregar_venta' : 'error_agregar_venta';
-			
-		}
-		
+		// obtenemos la respuesta ante la actualizacion
+		$_SESSION['resp']  = $filas >= 1 ? 'ok_editar_venta' : 'error_editar_venta';
+
+		header("Location: ../../index.php?seccion=ventas_recargas&accion=listar" );
 	}
-	header("Location: ../../index.php?seccion=ventas_recargas&accion=listar");
+
+	
 
 ?>
