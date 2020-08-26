@@ -10,19 +10,19 @@
 			die("Error en la solicitud");
 		}
 
-		$id_venta = $_GET['id'];
+		$id = $_GET['id'];
 		
-		$c5 = "DELETE FROM ventas_recargas WHERE ID = '$id_venta' LIMIT 1";
+		$c5 = "DELETE FROM excedente WHERE ID = '$id' LIMIT 1";
 		$exc5 = mysqli_query($cnx, $c5);
 
 		// numero de filas afectadas
 		$filas = mysqli_affected_rows($cnx);
 
 		// obtenemos la respuesta ante la eliminacion
-		$_SESSION['resp']  = $filas >= 1 ? 'ok_eliminar_venta' : 'error_eliminar_venta';
+		$_SESSION['resp']  = $filas >= 1 ? 'ok_eliminar' : 'error_eliminar';
 	}
 	
 	// regresando a la pagina principal
-	header("Location: ../../index.php?seccion=ventas_recargas&accion=listar");
+	header("Location: ../../index.php?seccion=excedente&accion=listar");
 	
 ?>

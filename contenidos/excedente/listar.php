@@ -63,13 +63,8 @@
 						{
               $fecha = date("d/m/Y", strtotime($columnas['FECHA']));
 
-              $boton_editar_eliminar = "<a class='btn btn-warning .edit' href='index.php?seccion=excedente&accion=editar&id=$columnas[ID]' title='Editar'><i class='fa fa-pencil'></i></a> <a class='btn btn-danger delete' href='accionesForms/excedente/eliminar.php?id=$columnas[ID]' onclick='return confirm('¿Eliminar el registro del día $columnas[FECHA]?')' title='Eliminar'><i class='fa fa-trash'></i></a>";
-
-              if($columnas['ID'] != $id_ultimo)
+              if($columnas['ID'] == $id_ultimo)
               {
-                $boton_editar_eliminar = "<a class='btn btn-warning .edit' href='index.php?seccion=excedente&accion=editar&id=$columnas[ID]' title='Editar' disabled><i class='fa fa-pencil'></i></a>
-                <a class='btn btn-danger delete' href='accionesForms/excedente/eliminar.php?id=$columnas[ID]' onclick='return confirm('¿Eliminar el registro del día $columnas[FECHA]?')' title='Eliminar' disabled><i class='fa fa-trash'></i></a>";
-              }
 							
 							echo <<<fila
 							<tr id="$columnas[ID]">
@@ -82,12 +77,35 @@
                 <td>$columnas[PERDIDAS]</td>
                 <td>$columnas[TOTAL_REAL]</td>
 							  <td>
-								<a class="btn btn-primary" title="Ver detalle de venta" href="index.php?seccion=ventas_recargas&accion=ver_detalle&id=$columnas[ID]"><i class="fa fa-eye"></i></a>
-                $boton_editar_eliminar
+								<a class="btn btn-primary" title="Ver detalle de venta" href="index.php?seccion=excedente&accion=ver_detalle&id=$columnas[ID]"><i class="fa fa-eye"></i></a>
+                <a class="btn btn-warning .edit" href="index.php?seccion=excedente&accion=editar&id=$columnas[ID]" title="Editar"><i class="fa fa-pencil"></i></a> 
+                <a class="btn btn-danger delete" href="accionesForms/excedente/eliminar.php?id=$columnas[ID]" onclick="return confirm('¿Eliminar el registro del día $columnas[FECHA]?')" title="Eliminar"><i class="fa fa-trash"></i></a>
 							  </td>
 							</tr>
 fila;
 						}
+            else
+            {
+              echo <<<fila
+              <tr id="$columnas[ID]">
+                <td>$fecha</td>
+                <td>$columnas[ING_PAPELERIA]</td>
+                <td>$columnas[ING_RECARGAS]</td>
+                <td>$columnas[DEUDAS_CANCEL]</td>
+                <td>$columnas[INVERSIONES]</td>
+                <td>$columnas[PRESTAMOS]</td>
+                <td>$columnas[PERDIDAS]</td>
+                <td>$columnas[TOTAL_REAL]</td>
+                <td>
+                <a class="btn btn-primary" title="Ver detalle de venta" href="index.php?seccion=excedente&accion=ver_detalle&id=$columnas[ID]"><i class="fa fa-eye"></i></a>
+                <a class="btn btn-warning .edit" title="Editar" disabled><i class="fa fa-pencil"></i></a> 
+                <a class="btn btn-danger delete" title="Eliminar" disabled><i class="fa fa-trash"></i></a>
+                </td>
+              </tr>
+fila;
+
+            }
+          }
 						mysqli_free_result($exc);
 					}
 					

@@ -92,7 +92,7 @@
             </div>
 
             <div class="box-footer">
-                <a href="index.php?seccion=ventas_recargas&accion=listar" style="width: 73px; height: 34px;" class="btn btn-success">Atrás</a>
+                <a href="index.php?seccion=excedente&accion=listar" style="width: 73px; height: 34px;" class="btn btn-success">Atrás</a>
                 <button type="submit" style="height: 34px;" class="btn btn-primary" onmouseover="calcular();">Guardar</button>
             </div>
               </form>
