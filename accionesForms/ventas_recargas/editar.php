@@ -2,7 +2,6 @@
 	if(isset($_POST['id_venta']))
 	{
 		$id_venta = $_POST['id_venta'];
-		$fecha = date('Y-m-d',strtotime($_POST['fecha']));
 
 		$saldo_anterior = $_POST['saldo_anterior'];
 		$recargado = $_POST['recargado'];

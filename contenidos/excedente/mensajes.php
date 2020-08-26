@@ -12,22 +12,22 @@
 
   $mensaje_editar_ok = "<div class='alert alert-success alert-dismissible'>
   <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-  El registro de la venta ha sido actualizado.
+  El registro fue actualizado.
   </div>";
 
   $mensaje_editar_error = "<div class='alert alert-danger alert-dismissible'>
   <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-  El registro de la venta no pudo ser actualizado.
+  El registro no pudo ser actualizado.
   </div>";
 
   $mensaje_eliminar_ok = "<div class='alert alert-success alert-dismissible'>
   <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-  La venta ha sido eliminada.
+  El registro fue eliminado.
   </div>";
 
   $mensaje_eliminar_error = "<div class='alert alert-danger alert-dismissible'>
   <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-  La venta no pudo ser eliminada.
+  El registro no pudo ser actualizado.
   </div>";
 
   echo "<div class='box-body'>";
