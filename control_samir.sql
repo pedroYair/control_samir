@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-08-2020 a las 04:47:36
+-- Tiempo de generación: 26-08-2020 a las 04:18:26
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.2.28
 
@@ -43,7 +43,12 @@ CREATE TABLE `abonos` (
 
 INSERT INTO `abonos` (`ID`, `FK_DEUDOR`, `FK_SERVICIO`, `ABONADO`, `FECHA_ABONO`, `OBSERVACION`) VALUES
 (5, 13, 17, 21000, '2020-08-18 20:51:49', ''),
-(6, 13, 19, 19000, '2020-08-18 21:03:04', '');
+(6, 13, 19, 19000, '2020-08-18 21:03:04', ''),
+(7, 14, 1, 5000, '2020-08-19 07:14:44', ''),
+(8, 14, 1, 40000, '2020-08-19 07:15:07', ''),
+(9, 13, 1, 500, '2020-08-19 11:52:27', ''),
+(10, 13, 2, 1000, '2020-08-19 11:52:36', ''),
+(11, 15, 17, 2000, '2020-08-23 20:48:31', '');
 
 -- --------------------------------------------------------
 
@@ -66,7 +71,15 @@ CREATE TABLE `detalle_deuda` (
 INSERT INTO `detalle_deuda` (`ID`, `FK_DEUDA`, `FK_SERVICIO`, `CANTIDAD`, `SUBTOTAL`) VALUES
 (57, 26, 17, 1, 21000),
 (58, 26, 1, 1, 19000),
-(59, 27, 17, 1, 7000);
+(59, 27, 17, 1, 7000),
+(60, 28, 1, 1, 10000),
+(61, 28, 2, 1, 40000),
+(62, 29, 1, 1, 1000),
+(63, 29, 2, 2, 600),
+(64, 29, 1, 5, 500),
+(65, 29, 5, 1, 500),
+(66, 30, 17, NULL, 10000),
+(67, 31, 17, NULL, 10000);
 
 -- --------------------------------------------------------
 
@@ -77,9 +90,19 @@ INSERT INTO `detalle_deuda` (`ID`, `FK_DEUDA`, `FK_SERVICIO`, `CANTIDAD`, `SUBTO
 CREATE TABLE `detalle_venta` (
   `ID` int(11) NOT NULL,
   `FK_VENTA` int(11) NOT NULL,
-  `FK_SERVICIO` int(11) NOT NULL,
+  `FK_SERVICIO` int(11) DEFAULT NULL,
+  `CANTIDAD` int(11) DEFAULT NULL,
   `SUBTOTAL` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `detalle_venta`
+--
+
+INSERT INTO `detalle_venta` (`ID`, `FK_VENTA`, `FK_SERVICIO`, `CANTIDAD`, `SUBTOTAL`) VALUES
+(78, 48, 1, 1, 10000),
+(80, 48, 2, 1, 1000),
+(81, 48, 3, 1, 5000);
 
 -- --------------------------------------------------------
 
@@ -101,7 +124,11 @@ CREATE TABLE `deuda` (
 
 INSERT INTO `deuda` (`ID`, `FK_DEUDOR`, `TOTAL`, `FECHA_DEUDA`, `OBSERVACION`) VALUES
 (26, 13, 40000, '2020-08-18 20:39:03', ''),
-(27, 14, 7000, '2020-08-18 21:30:37', '');
+(27, 14, 7000, '2020-08-18 21:30:37', ''),
+(28, 14, 50000, '2020-08-19 07:12:49', ''),
+(29, 13, 2600, '2020-08-19 11:41:50', ''),
+(30, 15, 10000, '2020-08-23 20:46:36', 'recarga directv'),
+(31, 14, 10000, '2020-08-23 20:46:36', 'recarga directv');
 
 -- --------------------------------------------------------
 
@@ -124,7 +151,36 @@ CREATE TABLE `deudor` (
 
 INSERT INTO `deudor` (`ID`, `NOMBRE`, `FECHA_ALTA`, `OBSERVACION`, `FOTO`, `ESTADO`) VALUES
 (13, 'PADRE', '2020-08-18', '', NULL, 1),
-(14, 'MADRE', '2020-08-18', '', NULL, 1);
+(14, 'MADRE', '2020-08-18', '', NULL, 1),
+(15, 'samir', '2020-08-24', '', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `excedente`
+--
+
+CREATE TABLE `excedente` (
+  `ID` int(11) NOT NULL,
+  `FECHA` date NOT NULL,
+  `CAJA` double NOT NULL,
+  `ING_PAPELERIA` double NOT NULL,
+  `ING_RECARGAS` double NOT NULL,
+  `DEUDAS_CANCEL` double NOT NULL,
+  `INVERSIONES` double NOT NULL,
+  `PRESTAMOS` double NOT NULL,
+  `PERDIDAS` double NOT NULL,
+  `TOTAL_REAL` double NOT NULL,
+  `OBSERVACION` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `excedente`
+--
+
+INSERT INTO `excedente` (`ID`, `FECHA`, `CAJA`, `ING_PAPELERIA`, `ING_RECARGAS`, `DEUDAS_CANCEL`, `INVERSIONES`, `PRESTAMOS`, `PERDIDAS`, `TOTAL_REAL`, `OBSERVACION`) VALUES
+(1, '2019-10-04', 6000, 2000, 2000, 2000, 2000, 2000, 2000, 3000, 'Primero de prueba editando'),
+(2, '2019-10-07', 14000, 2000, 2000, 2000, 2000, 2000, 2000, 3000, 'Primero de prueba editando');
 
 -- --------------------------------------------------------
 
@@ -136,6 +192,8 @@ CREATE TABLE `servicios` (
   `ID` int(11) NOT NULL,
   `SERVICIO` varchar(20) NOT NULL,
   `PRECIO` double DEFAULT NULL,
+  `ESTADO` tinyint(1) NOT NULL,
+  `EDITABLE` tinyint(1) NOT NULL,
   `OBSERVACION` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -143,14 +201,14 @@ CREATE TABLE `servicios` (
 -- Volcado de datos para la tabla `servicios`
 --
 
-INSERT INTO `servicios` (`ID`, `SERVICIO`, `PRECIO`, `OBSERVACION`) VALUES
-(1, 'COPIAS', 0, '100 blanco y negro, 300 color'),
-(2, 'IMPRESIONES', 0, '300 blanco y negro, 500 color'),
-(3, 'INTERNET', 0, '500 media hora'),
-(5, 'ESCANERS', 500, '500 por documento, cedula 1000'),
-(17, 'RECARGAS', 0, 'recarga mínima 1000'),
-(18, 'TRANSCRIPCIONES', 1000, '1000 por hoja'),
-(19, 'PAPELERIA', 0, 'Papelería en general');
+INSERT INTO `servicios` (`ID`, `SERVICIO`, `PRECIO`, `ESTADO`, `EDITABLE`, `OBSERVACION`) VALUES
+(1, 'COPIAS', 0, 1, 1, '100 blanco y negro, 300 color'),
+(2, 'IMPRESIONES', 0, 1, 1, '300 blanco y negro, 500 color'),
+(3, 'INTERNET', 0, 1, 1, '500 media hora'),
+(5, 'ESCANERS', 500, 1, 1, '500 por documento, cedula 1000'),
+(17, 'RECARGAS', 0, 1, 0, 'recarga mínima 1000'),
+(18, 'TRANSCRIPCIONES', 1000, 1, 1, '1000 por hoja'),
+(19, 'PAPELERIA', 0, 1, 1, 'Papelería en general');
 
 -- --------------------------------------------------------
 
@@ -186,10 +244,65 @@ INSERT INTO `usuarios` (`ID`, `EMAIL`, `CLAVE`, `FECHA_ALTA`, `ESTADO`, `NIVEL`,
 
 CREATE TABLE `ventas` (
   `ID` int(11) NOT NULL,
-  `TOTAL` double NOT NULL,
-  `FECHA_VENTA` datetime NOT NULL,
+  `FECHA_VENTA` date NOT NULL,
+  `TOTAL_ESPERADO` double NOT NULL,
+  `TOTAL_REAL` double NOT NULL,
+  `TOTAL_DIA` double NOT NULL,
+  `CAJA_ANTERIOR` double NOT NULL,
+  `INVERSIONES` double NOT NULL,
+  `DEUDAS` double NOT NULL,
+  `DEUDAS_CANCEL` int(11) NOT NULL,
+  `ESTADO` tinyint(1) NOT NULL,
   `OBSERVACION` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `ventas`
+--
+
+INSERT INTO `ventas` (`ID`, `FECHA_VENTA`, `TOTAL_ESPERADO`, `TOTAL_REAL`, `TOTAL_DIA`, `CAJA_ANTERIOR`, `INVERSIONES`, `DEUDAS`, `DEUDAS_CANCEL`, `ESTADO`, `OBSERVACION`) VALUES
+(21, '2020-08-20', 0, 26000, 1000, 25000, 0, 0, 0, 1, NULL),
+(48, '2020-08-22', 47500, 49000, 16000, 26000, 500, 5000, 6000, 1, 'sin inversiones');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas_recargas`
+--
+
+CREATE TABLE `ventas_recargas` (
+  `ID` int(11) NOT NULL,
+  `FECHA` date NOT NULL,
+  `SALDO_DIA_ANTERIOR` double NOT NULL,
+  `RECARGADO` double NOT NULL,
+  `SALDO_HOY` double NOT NULL,
+  `CAJA_ANTERIOR` double NOT NULL,
+  `VENTAS_DIA` double NOT NULL,
+  `DEUDAS` double NOT NULL,
+  `DEUDAS_CANCEL` double NOT NULL,
+  `INVERSIONES` double NOT NULL,
+  `PERDIDAS` double NOT NULL,
+  `TOTAL_ESPERADO` double NOT NULL,
+  `TOTAL_REAL` double NOT NULL,
+  `SALDO_CIERRE_ESP` double NOT NULL,
+  `SALDO_CIERRE_REAL` double NOT NULL,
+  `ESTADO` tinyint(4) NOT NULL,
+  `OBSERVACION` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `ventas_recargas`
+--
+
+INSERT INTO `ventas_recargas` (`ID`, `FECHA`, `SALDO_DIA_ANTERIOR`, `RECARGADO`, `SALDO_HOY`, `CAJA_ANTERIOR`, `VENTAS_DIA`, `DEUDAS`, `DEUDAS_CANCEL`, `INVERSIONES`, `PERDIDAS`, `TOTAL_ESPERADO`, `TOTAL_REAL`, `SALDO_CIERRE_ESP`, `SALDO_CIERRE_REAL`, `ESTADO`, `OBSERVACION`) VALUES
+(4, '2020-08-17', 77000, 0, 77000, 90600, 50000, 10000, 16000, 0, 0, 146600, 147400, 27000, 27000, 1, 'Inicio'),
+(6, '2020-08-18', 27000, 168000, 195000, 147400, 21000, 5000, 36000, 164000, 0, 35400, 35400, 174000, 168000, 1, 'Registro 2'),
+(7, '2020-08-19', 168000, 0, 168000, 35400, 27000, 5000, 15000, 0, 0, 72400, 72500, 141000, 143000, 1, ''),
+(8, '2020-08-20', 143000, 0, 143000, 72500, 41000, 41000, 11000, 0, 20000, 63500, 65500, 102000, 113000, 1, 'Perdidas aproximadas de 20000'),
+(9, '2020-08-21', 113000, 0, 113000, 65500, 39000, 12000, 15000, 0, 0, 107500, 107500, 74000, 75000, 1, ''),
+(10, '2020-08-22', 75000, 0, 75000, 107500, 34000, 12000, 10000, 0, 0, 139500, 139500, 41000, 41000, 1, ''),
+(11, '2020-08-23', 41000, 0, 41000, 139500, 41000, 20000, 18000, 0, 0, 178500, 178500, 0, 0, 1, ''),
+(14, '2020-08-24', 0, 200000, 200000, 178500, 38000, 5000, 24000, 190000, 0, 45500, 45500, 162000, 0, 1, '190000 recarga de saldo');
 
 --
 -- Índices para tablas volcadas
@@ -216,8 +329,8 @@ ALTER TABLE `detalle_deuda`
 --
 ALTER TABLE `detalle_venta`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_VENTA_INDEX` (`FK_VENTA`),
-  ADD KEY `FK_SERVICIO_INDEX` (`FK_SERVICIO`);
+  ADD KEY `FK_SERVICIO_INDEX` (`FK_SERVICIO`),
+  ADD KEY `VENTA_INDEX` (`FK_VENTA`);
 
 --
 -- Indices de la tabla `deuda`
@@ -230,6 +343,12 @@ ALTER TABLE `deuda`
 -- Indices de la tabla `deudor`
 --
 ALTER TABLE `deudor`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `excedente`
+--
+ALTER TABLE `excedente`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -249,6 +368,13 @@ ALTER TABLE `usuarios`
 -- Indices de la tabla `ventas`
 --
 ALTER TABLE `ventas`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `FECHA_VENTA_UNIQ` (`FECHA_VENTA`);
+
+--
+-- Indices de la tabla `ventas_recargas`
+--
+ALTER TABLE `ventas_recargas`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -259,37 +385,43 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `abonos`
 --
 ALTER TABLE `abonos`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_deuda`
 --
 ALTER TABLE `detalle_deuda`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT de la tabla `deuda`
 --
 ALTER TABLE `deuda`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `deudor`
 --
 ALTER TABLE `deudor`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `excedente`
+--
+ALTER TABLE `excedente`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -301,7 +433,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
+-- AUTO_INCREMENT de la tabla `ventas_recargas`
+--
+ALTER TABLE `ventas_recargas`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Restricciones para tablas volcadas
@@ -325,8 +463,8 @@ ALTER TABLE `detalle_deuda`
 -- Filtros para la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  ADD CONSTRAINT `detalle_venta_ibfk_2` FOREIGN KEY (`FK_VENTA`) REFERENCES `ventas` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `detalle_venta_ibfk_3` FOREIGN KEY (`FK_SERVICIO`) REFERENCES `servicios` (`ID`);
+  ADD CONSTRAINT `detalle_venta_ibfk_3` FOREIGN KEY (`FK_SERVICIO`) REFERENCES `servicios` (`ID`) ON DELETE SET NULL ON UPDATE SET NULL,
+  ADD CONSTRAINT `detalle_venta_ibfk_4` FOREIGN KEY (`FK_VENTA`) REFERENCES `ventas` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `deuda`
