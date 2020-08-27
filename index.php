@@ -197,6 +197,17 @@ TABLES;
 						case 'ver_detalle': include( 'contenidos/excedente/detalle.php'); break;
 					  endswitch;
 					break;
+
+					case 'usuarios':
+					  $accion = $_GET['accion'];
+
+					  switch( $accion ):
+						case 'listar': include( 'contenidos/usuarios/listar.php'); break;
+						case 'agregar': include( 'contenidos/usuarios/agregar.php'); break;
+						case 'editar': include( 'contenidos/usuarios/editar.php'); break;
+						case 'ver_detalle': include( 'contenidos/usuarios/detalle.php'); break;
+					  endswitch;
+					break;
 					
 					default: 
 						echo "<p class='error'>La sección solicitada ($seccion), no existe</p>";

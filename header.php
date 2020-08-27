@@ -88,7 +88,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                  <a href="index.php?seccion=usuarios&accion=editar&acceso=perfil" class="btn btn-default btn-flat">Perfil</a>
                 </div>
                 <div class="pull-right">
                   <a href="accionesForms/logout.php" class="btn btn-default btn-flat">Cerrar sesión</a>
