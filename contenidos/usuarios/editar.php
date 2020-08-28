@@ -25,7 +25,7 @@
       $email = $fila['EMAIL'];
       $nivel = $fila['NIVEL'];
       $foto = $fila['FOTO'];
-      $acceso = isset($_GET['acceso']) ? $_GET['acceso'] : "lista";
+      $acceso = isset($_GET['acceso']) ? $_GET['acceso'] : "";
     }
     else
     {
@@ -91,9 +91,7 @@
                   <input name="new_password" type="password" class="form-control" autocomplete="off" required>
                 </div>
 
-                
-
-                  <div class="form-group">
+                <div class="form-group">
                   <label>Nivel</label>
                   <?php if($nivel == "administrador"): ?>
                     <select name="nivel" class="form-control">
@@ -132,7 +130,9 @@
             </div>
 
             <div class="box-footer">
-                <a href="#" style="width: 73px; height: 34px;" class="btn btn-success">Atrás</a>
+                <?php if($acceso == ""): ?>
+                  <a href="index.php?seccion=usuarios&accion=listar" style="width: 73px; height: 34px;" class="btn btn-success">Atrás</a>
+                <?php endif ?>
                 <?php
                 if($nombre != "")
                 {

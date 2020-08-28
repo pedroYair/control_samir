@@ -42,7 +42,7 @@
         <li><a href="index.php?seccion=excedente&accion=listar"><i class="fa fa-money"></i> <span>Excedente</span></a></li>
 
         <?php if(isset($_SESSION['NIVEL']) and $_SESSION['NIVEL'] == "administrador" ): ?>
-          <li><a href="#"><i class="fa fa-users"></i> <span>Usuarios</span></a></li>
+          <li><a href="index.php?seccion=usuarios&accion=listar"><i class="fa fa-users"></i> <span>Usuarios</span></a></li>
         <?php endif ?>
       </ul>
     </section>

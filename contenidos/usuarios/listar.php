@@ -1,10 +1,10 @@
 <?php
   
-	$consulta = "SELECT * FROM deudor ORDER BY NOMBRE";
+	$consulta = "SELECT * FROM usuarios ORDER BY NOMBRE";
   $exc = mysqli_query($cnx, $consulta);
 
   
-  // obtengo mensaje de insercion, actualizacion o eliminacion de servicios
+  // obtengo mensaje de insercion, actualizacion o eliminacion
   $resp = "";
   if(isset( $_SESSION['resp'] ))
   {
@@ -17,7 +17,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Deudores</h3>
+              <h3 class="box-title">Usuarios</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -31,7 +31,7 @@
 
               <div class="form-group">
                     <div class="col-md-offset-2 col-md-8" style="margin-left:0px;">
-                        <a class="btn btn-primary" href="index.php?seccion=deudores&accion=agregar" title="Agregar deudores" style="margin:10px;"><i class="fa fa-plus"></i> Agregar</a>
+                        <a class="btn btn-primary" href="index.php?seccion=usuarios&accion=agregar" title="Agregar deudores" style="margin:10px;"><i class="fa fa-plus"></i> Agregar</a>
                     </div>
               </div>
 
@@ -40,9 +40,10 @@
                 <tr>
                   <th>#</th>
                   <th>Nombre</th>
-                  <th>Estado</th>
+                  <th>Nivel</th>
+                  <th>Email</th>
                   <th>Fecha Alta</th>
-                  <th>Observación</th>
+                  <th>Estado</th>
                   <th>Acciones</th>
                 </tr>
                 </thead>
@@ -64,13 +65,14 @@
 							echo <<<fila
 							<tr id="$columnas[ID]">
 							  <td>$contador</td>
-							  <td>$columnas[NOMBRE]</td>
+                <td>$columnas[NOMBRE]</td>
+                <td>$columnas[NIVEL]</td>
+							  <td>$columnas[EMAIL]</td>
+                <td>$columnas[FECHA_ALTA]</td>
                 <td>$estado</td>
-							  <td>$columnas[FECHA_ALTA]</td>
-							  <td>$columnas[OBSERVACION]</td>
                 <td>
-                  <a class="btn btn-warning .edit" href="index.php?seccion=deudores&accion=editar&id=$columnas[ID]" title="Editar"><i class="fa fa-pencil"></i></a>
-                  <a class="btn btn-danger delete" href="accionesForms/deudores/eliminar.php?id=$columnas[ID]" onclick="return confirm('¿Eliminar el deudor $columnas[NOMBRE]?')" title="Eliminar"><i class="fa fa-trash"></i></a>
+                  <a class="btn btn-warning .edit" href="index.php?seccion=usuarios&accion=editar&id=$columnas[ID]" title="Editar"><i class="fa fa-pencil"></i></a>
+                  <a class="btn btn-danger delete" href="accionesForms/usuarios/eliminar.php?id=$columnas[ID]" onclick="return confirm('¿Inhabilitar al usuario $columnas[NOMBRE]?')" title="Inhabilitar"><i class="fa fa-trash"></i></a>
                 </td>
 							</tr>
 fila;
