@@ -10,11 +10,13 @@
 			die("Error en la solicitud");
 		}
 	
-		$id_deudor = $_GET['id'];
+		$id = $_GET['id'];
 		
-		$sql = "DELETE FROM deudor WHERE ID = '$id_deudor' LIMIT 1";
+		$sql = "UPDATE usuarios SET ESTADO = '0' WHERE ID = '$id' LIMIT 1";
 		
 		$resp = mysqli_query($cnx, $sql);
+
+		echo mysqli_error($cnx);
 
 		// numero de filas afectadas
 		$filas = mysqli_affected_rows($cnx);
@@ -24,6 +26,6 @@
 	}
 	
 	// regresando a la pagina principal
-	header("Location: ../../index.php?seccion=deudores&accion=listar" );
+	header("Location: ../../index.php?seccion=usuarios&accion=listar" );
 	
 ?>

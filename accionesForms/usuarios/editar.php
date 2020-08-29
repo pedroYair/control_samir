@@ -5,7 +5,7 @@
 		$email = $_POST['email'];
 		$nivel = $_POST['nivel'];
 		$old_pass = isset($_POST['password']) ? $_POST['password'] : "";
-		$new_pass = $_POST['new_password'];
+		$new_pass = $_POST['new_password'] != "" ? $_POST['new_password'] : $_POST['password'];
 		$estado = isset($_POST['estado']) ? $_POST['estado'] : 1;
 		$imagen = str_replace("\\", "/", $_FILES['foto']['tmp_name']);
 		$id = $_POST['id'];

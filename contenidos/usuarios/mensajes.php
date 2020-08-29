@@ -16,12 +16,22 @@
 
   $mensaje_agregar_ok = "<div class='alert alert-success alert-dismissible'>
   <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-  Deudor agregado satisfactoriamente.
+  Usuario agregado satisfactoriamente.
   </div>";
 
   $mensaje_agregar_error = "<div class='alert alert-danger alert-dismissible'>
   <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-  El deudor no pudo ser agregado.
+  El usuario no pudo ser agregado.
+  </div>";
+
+  $mensaje_eliminar_ok = "<div class='alert alert-success alert-dismissible'>
+  <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+  El estado del usuario ha sido actualizado satisfactoriamente.
+  </div>";
+
+  $mensaje_eliminar_error = "<div class='alert alert-danger alert-dismissible'>
+  <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+  El estado del usuario no pudo ser actualizado.
   </div>";
 
 
@@ -48,8 +58,6 @@
     case 'error_agregar':
       echo $mensaje_agregar_error;
     break;
-
-    
 
     case 'ok_eliminar': 
       echo $mensaje_eliminar_ok;

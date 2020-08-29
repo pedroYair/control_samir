@@ -1,8 +1,12 @@
 <?php 
-	if(isset($_POST['nombre']))
+	if(isset($_POST['nombre']) and isset($_POST['email']))
 	{
 		$nombre = strtoupper($_POST['nombre']);
-		$obs = $_POST['observacion'];
+		$email = $_POST['email'];
+		$pass = $_POST['password'];
+		// $clave = SHA1($clave);
+		echo $pass;
+		$nivel = $_POST['nivel'];
 		// reemplzamos la "\" de la ruta de la imagen por "/" para evitar errores
 		$imagen = str_replace("\\", "/", $_FILES['foto']['tmp_name']);
 	}
@@ -14,15 +18,18 @@
 		die("Error en la solicitud");
 	}
 	
-	// si $servicio es una cadena vacia se coloca null y eso hace que falle el insert
-	$c = "INSERT INTO deudor 
+	$c = "INSERT INTO usuarios 
 			SET NOMBRE = NULLIF('$nombre', ''),
 			FECHA_ALTA = NOW(),
-			OBSERVACION = '$obs',
+			EMAIL = NULLIF('$email', ''),
+			CLAVE = SHA1('$pass'),
+			NIVEL = '$nivel',
 			FOTO= LOAD_FILE('$imagen'),
 			ESTADO= '1'";
 	
 	$f = mysqli_query($cnx, $c);
+
+	echo mysqli_error($cnx);
 	
 	// numero de filas afectadas
 	$filas = mysqli_affected_rows($cnx);
@@ -30,6 +37,6 @@
 	// obtenemos la respuesta ante la inserción
 	$_SESSION['resp']  = $filas >= 1 ? 'ok_agregar' : 'error_agregar';
 
-	header("Location: ../../index.php?seccion=deudores&accion=listar" );
+	header("Location: ../../index.php?seccion=usuarios&accion=listar" );
 
 ?>

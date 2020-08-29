@@ -8,9 +8,9 @@
   $id = "";
   $resp = "";
 
-  if(isset($_SESSION['ID']))
+  if(isset($_SESSION['ID']) or isset($_GET['id']))
   {
-    $id = $_SESSION['ID'];
+    $id = isset($_GET['id']) ? $_GET['id'] : $_SESSION['ID'];
 
     $c = "SELECT EMAIL, ESTADO, NIVEL, NOMBRE, FOTO FROM usuarios WHERE ID= '$id' LIMIT 1";
 
@@ -88,12 +88,12 @@
 
                 <div class="form-group">
                   <label>Contraseña nueva</label>
-                  <input name="new_password" type="password" class="form-control" autocomplete="off" required>
+                  <input name="new_password" type="password" class="form-control" autocomplete="off">
                 </div>
 
                 <div class="form-group">
                   <label>Nivel</label>
-                  <?php if($nivel == "administrador"): ?>
+                  <?php if($_SESSION['NIVEL'] == "administrador"): ?>
                     <select name="nivel" class="form-control">
                       <option value="administrador" <?php if($nivel == "administrador"){ echo 'selected';} ?>>Administrador</option>
                       <option value="moderador" <?php if($nivel == "moderador"){ echo 'selected';} ?>>Moderador</option>
@@ -104,7 +104,7 @@
                   <?php endif ?>
                 </div>
 
-              <?php if($nivel == "administrador"): ?>
+              <?php if($_SESSION['NIVEL'] == "administrador"): ?>
 
                 <div class="form-group">
                   <label>Estado</label>
