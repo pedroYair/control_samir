@@ -6,6 +6,16 @@
   $box_resp = mysqli_query($cnx, $consulta_deuda_recargas);
 
   $total_deuda_rec = mysqli_fetch_assoc($box_resp);
+
+  // consulta para grafico del excedente
+  $consulta_exc = "SELECT FECHA, TOTAL_REAL FROM excedente LIMIT 15";
+  $exc_resp = mysqli_query($cnx, $consulta_exc);
+
+  $response = array();
+  while($row = mysqli_fetch_assoc($exc_resp)) $response[] = $row;
+
+  // save the JSON encoded array
+  $jsonData = json_encode($response); 
 ?>
 <div class="row">
         <div class="col-lg-3 col-xs-6">
@@ -79,4 +89,8 @@
           </div>
         </div>
         <!-- ./col -->
-      </div>
+</div>
+
+<div style="width: 100%">
+  <canvas id="canvas"></canvas>
+</div>

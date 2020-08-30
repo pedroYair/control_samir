@@ -9,6 +9,7 @@ if($seccion != 'detalle_deudas' and isset($_SESSION['id_insertado']))
 {
     unset($_SESSION['id_insertado']);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -32,13 +33,6 @@ if($seccion != 'detalle_deudas' and isset($_SESSION['id_insertado']))
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
-  <!-- Morris chart -->
-  <link rel="stylesheet" href="bower_components/morris.js/morris.css">
-  <!-- jvectormap -->
-  <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">
-  <!-- Date Picker -->
-  <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-  
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
@@ -223,9 +217,6 @@ TABLES;
 		}
 	 
 	  ?>
-	  
-	  
-
     </section>
     <!-- /.content------------------------------------------------------------------------------------------ -->
 	
@@ -262,9 +253,6 @@ TABLES;
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Select2 -->
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
-<!-- Morris.js charts -->
-<script src="bower_components/raphael/raphael.min.js"></script>
-<script src="bower_components/morris.js/morris.min.js"></script>
 <!-- Sparkline -->
 <script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
@@ -272,11 +260,6 @@ TABLES;
 <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <!-- jQuery Knob Chart -->
 <script src="bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="bower_components/moment/min/moment.min.js"></script>
-<script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-<!-- datepicker -->
-<script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll -->
@@ -287,8 +270,9 @@ TABLES;
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+
+<script src="dist/js/Chart.min.js"></script>
+<!-- inicializando select2 -->
 <script>
   $(function () {
     //Initialize Select2 Elements
@@ -355,6 +339,57 @@ TABLES;
 	}
 
   ?>
-  
+
+<script>
+	var valores = []
+    var labels = []
+  	var data = <?= $jsonData ?>;
+
+  	for(var i=0; i<data.length; i++)
+  	{
+  		var d = new Date(data[i]['FECHA']);
+		var ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+		var mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(d);
+		var da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+
+		var fecha = `${da}-${mo}-${ye}`;
+  		labels.push(fecha);
+  		valores.push(data[i]['TOTAL_REAL']);
+  	}
+
+  	var lineChartData = {
+                    labels: labels,
+                    datasets: [{
+                        label: 'excedente',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        data: valores
+                    }]
+                };
+
+     // Funcion que genera la grafica
+    function generar () {
+                    var ctx = document.getElementById("canvas").getContext("2d");
+                    window.myBar = new Chart(ctx, {
+                        type: 'line',
+                        data: lineChartData,
+                        options: {
+                            title:{
+                                display:true,
+                                text:"Gráfico - Excedente últimos 15 registros"
+                            },
+                            tooltips: {
+                                mode: 'index',
+                                intersect: false
+                            },
+                            responsive: true
+
+                        }
+                    });
+                };
+
+    generar();
+
+</script>
+
 </body>
 </html>
