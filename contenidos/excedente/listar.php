@@ -18,6 +18,8 @@
   $id_ultimo = is_null($ultimo['ID']) ? 0 : $ultimo['ID'];
 ?>
 
+<?php if(verificar_seguridad()): ?>
+
 	<div class="row">
         <div class="col-xs-12">
           <div class="box">
@@ -33,12 +35,13 @@
                   include("mensajes.php");
                 }
             ?>
-
+            <?php if($_SESSION['NIVEL'] != 'lector'): ?>
               <div class="form-group">
                     <div class="col-md-offset-2 col-md-8" style="margin-left:0px;">
                       <a class="btn btn-primary" href="index.php?seccion=excedente&accion=agregar" title="Agregar excedente" style="margin:10px;"><i class="fa fa-plus"></i> Agregar</a>
                     </div>
               </div>
+            <?php endif ?>
 
               <table id="listado_ventas" class="table table-bordered table-hover">
                 <thead>
@@ -118,3 +121,16 @@ fila;
         </div>
     </div>
           <!-- /.box -->
+<?php 
+  else:
+    $mensaje_permisos = "<div class='alert alert-danger alert-dismissible'>
+  <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+  No cuenta con los permisos necesarios para realizar esta acción.
+  </div>";
+
+  echo $mensaje_permisos;
+
+  endif
+
+
+ ?>

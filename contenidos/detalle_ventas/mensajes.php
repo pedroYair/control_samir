@@ -35,6 +35,11 @@
   La venta no pudo ser eliminada.
   </div>";
 
+  $mensaje_permisos = "<div class='alert alert-danger alert-dismissible'>
+  <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+  No cuenta con los permisos necesarios para realizar esta acción.
+  </div>";
+
   echo "<div class='box-body'>";
 
   switch($resp)
@@ -65,6 +70,10 @@
 
     case 'error_agregar_detalle': 
       echo $mensaje_error_agregar_detalle;
+    break;
+
+    case 'error_permisos':
+      echo $mensaje_permisos;
     break;
   }
 

@@ -13,7 +13,9 @@
 
 	if(!verificar_seguridad())
 	{
-		die("Error en la solicitud");
+		$_SESSION['resp'] = "error_permisos";
+		header("Location: ../../index.php?seccion=ventas_papeleria&accion=listar" );
+		die();
 	}
 
 	// verificamos que no exista una venta de dia actual

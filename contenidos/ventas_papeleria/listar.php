@@ -34,23 +34,25 @@
                         $verificar = "SELECT ID, ESTADO FROM ventas WHERE FECHA_VENTA = '$hoy'";
                         $exc_ver = mysqli_query($cnx, $verificar);
                         $actual = mysqli_fetch_assoc($exc_ver);
-
-                        if(is_null($actual['ID']) or $actual['ESTADO'] == 0)
-                        {
-                          if(is_null($actual['ID'])) 
+                        
+                        if($_SESSION['NIVEL'] != 'lector'):
+                          if(is_null($actual['ID']) or $actual['ESTADO'] == 0)
                           {
-                            echo "<a class='btn btn-primary' href='index.php?seccion=ventas_papeleria&accion=agregar' title='Agregar ventas papeleria' style='margin:10px;'><i class='fa fa-plus'></i> Agregar</a>";
+                            if(is_null($actual['ID'])) 
+                            {
+                              echo "<a class='btn btn-primary' href='index.php?seccion=ventas_papeleria&accion=agregar' title='Agregar ventas papeleria' style='margin:10px;'><i class='fa fa-plus'></i> Agregar</a>";
+                            }
+                            else
+                            {
+                              echo "<a class='btn btn-primary' href='index.php?seccion=detalle_ventas&accion=agregar&id=$actual[ID]' title='Agregar ventas papeleria' style='margin:10px;'><i class='fa fa-plus'></i> Agregar</a>";
+                            }
+                            
                           }
                           else
                           {
-                            echo "<a class='btn btn-primary' href='index.php?seccion=detalle_ventas&accion=agregar&id=$actual[ID]' title='Agregar ventas papeleria' style='margin:10px;'><i class='fa fa-plus'></i> Agregar</a>";
+                            echo "<a class='btn btn-primary' href='index.php?seccion=ventas_papeleria&accion=agregar' title='Agregar ventas papeleria' style='margin:10px;' disabled><i class='fa fa-plus'></i> Agregar</a>";
                           }
-                          
-                        }
-                        else
-                        {
-                          echo "<a class='btn btn-primary' href='index.php?seccion=ventas_papeleria&accion=agregar' title='Agregar ventas papeleria' style='margin:10px;' disabled><i class='fa fa-plus'></i> Agregar</a>";
-                        }
+                        endif
                       ?>
                     </div>
               </div>

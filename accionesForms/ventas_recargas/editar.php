@@ -28,7 +28,9 @@
 
 		if(!verificar_seguridad())
 		{
-			die("Error en la solicitud");
+			$_SESSION['resp'] = "error_permisos";
+			header("Location: ../../index.php?seccion=ventas_recargas&accion=listar" );
+			die();
 		}
 		
 		$c = "UPDATE ventas_recargas SET SALDO_DIA_ANTERIOR = '$saldo_anterior',

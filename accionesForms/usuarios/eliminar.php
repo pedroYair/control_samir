@@ -5,14 +5,14 @@
 		include("../../setup/configuracion.php");
 		
 		// se verifica que el usuario logueado tenga el rol de administrador
-		if(!verificar_seguridad())
+		if(!verificar_seguridad_usuarios())
 		{
 			die("Error en la solicitud");
 		}
 	
 		$id = $_GET['id'];
 		
-		$sql = "UPDATE usuarios SET ESTADO = '0' WHERE ID = '$id' LIMIT 1";
+		$sql = "UPDATE usuarios SET ESTADO = (ESTADO - 1) * -1 WHERE ID = '$id' LIMIT 1";
 		
 		$resp = mysqli_query($cnx, $sql);
 

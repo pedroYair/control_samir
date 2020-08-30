@@ -12,7 +12,9 @@
 
 	if(!verificar_seguridad())
 	{
-		die("Error en la solicitud");
+		$_SESSION['resp'] = "error_permisos";
+		header("Location: ../../index.php?seccion=deudores&accion=listar" );
+		die();
 	}
 	
 	// si $servicio es una cadena vacia se coloca null y eso hace que falle el insert

@@ -10,7 +10,9 @@
 
 	if(!verificar_seguridad())
 	{
-		die("Error en la solicitud");
+		$_SESSION['resp'] = "error_permisos";
+		header("Location: ../../index.php?seccion=deudas&accion=listar" );
+		die();
 	}
 	
 	$c = "INSERT INTO deuda

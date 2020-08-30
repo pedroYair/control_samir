@@ -72,7 +72,7 @@
                 <td>$estado</td>
                 <td>
                   <a class="btn btn-warning .edit" href="index.php?seccion=usuarios&accion=editar&id=$columnas[ID]" title="Editar"><i class="fa fa-pencil"></i></a>
-                  <a class="btn btn-danger delete" href="accionesForms/usuarios/eliminar.php?id=$columnas[ID]" onclick="return confirm('¿Inhabilitar al usuario $columnas[NOMBRE]?')" title="Inhabilitar"><i class="fa fa-trash"></i></a>
+                  <a class="btn btn-danger delete" href="accionesForms/usuarios/eliminar.php?id=$columnas[ID]" onclick="return confirm('¿Inhabilitar/Habilitar al usuario $columnas[NOMBRE]?')" title="Inhabilitar"><i class="fa fa-trash"></i></a>
                 </td>
 							</tr>
 fila;

@@ -17,7 +17,9 @@
 
 		if(!verificar_seguridad())
 		{
-			die("Error en la solicitud");
+			$_SESSION['resp'] = "error_permisos";
+			header("Location: ../../index.php?seccion=excedente&accion=listar" );
+			die();
 		}
 
 		$c_new_venta = "INSERT INTO excedente

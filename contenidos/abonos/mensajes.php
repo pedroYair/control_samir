@@ -10,6 +10,8 @@ $mensaje_agregar_error = "<div class='alert alert-danger alert-dismissible'>
 El abono no pudo ser agregado.
 </div>";
 
+
+
   echo "<div class='box-body'>";
 
   switch($resp)
@@ -20,6 +22,10 @@ El abono no pudo ser agregado.
 
     case 'error_agregar': 
       echo $mensaje_agregar_error;
+    break;
+
+    case 'error_permisos':
+      echo $mensaje_permisos;
     break;
   }
 

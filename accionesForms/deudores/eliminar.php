@@ -7,7 +7,9 @@
 		// se verifica que el usuario logueado tenga el rol de administrador
 		if(!verificar_seguridad())
 		{
-			die("Error en la solicitud");
+			$_SESSION['resp'] = "error_permisos";
+			header("Location: ../../index.php?seccion=deudores&accion=listar" );
+			die();
 		}
 	
 		$id_deudor = $_GET['id'];

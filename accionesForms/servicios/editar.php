@@ -11,7 +11,13 @@
 
 	if(!verificar_seguridad())
 	{
-		die("Error en la solicitud");
+		$_SESSION['resp'] = "error_permisos";
+		header("Location: ../../index.php?seccion=servicios&accion=listar" );
+		die();
+	}
+	else
+	{
+		echo "no es falso";
 	}
 	
 	// si $servicio es una cadena vacia se coloca null y eso hace que falle el insert

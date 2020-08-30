@@ -45,18 +45,7 @@ SERVICIO;
 									<input type="hidden" name="id_deuda" value="<?php echo $id_deuda_insertada;?>">
 								
 									<div class="box-footer">
-										<?php
-											$finalizar = "<a href='index.php?seccion=deudas&accion=listar' style='width: 73px; height: 34px;' class='btn btn-success'>Finalizar</a>";
-
-											if($subtotal_agregado > 0)
-											{
-												echo $finalizar;
-											}
-											else
-											{
-												echo "<a href='index.php?seccion=deudas&accion=listar' style='width: 73px; height: 34px;' class='btn btn-success' disabled>Finalizar</a>";
-											}
-										?>
+										<a href='index.php?seccion=deudas&accion=listar' style='width: 73px; height: 34px;' class='btn btn-success'>Atrás</a>
 										<button type="submit" style="height: 34px;" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar</button>
 									</div>
 								  </form>

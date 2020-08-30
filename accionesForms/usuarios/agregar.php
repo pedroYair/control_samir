@@ -13,7 +13,7 @@
 
 	include( '../../setup/configuracion.php' );
 
-	if(!verificar_seguridad())
+	if(!verificar_seguridad_usuarios())
 	{
 		die("Error en la solicitud");
 	}

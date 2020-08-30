@@ -28,12 +28,13 @@
                   include("mensajes.php");
                 }
             ?>
-
+            <?php if($_SESSION['NIVEL'] != 'lector'): ?>
               <div class="form-group">
                     <div class="col-md-offset-2 col-md-8" style="margin-left:0px;">
                         <a class="btn btn-primary" href="index.php?seccion=deudores&accion=agregar" title="Agregar deudores" style="margin:10px;"><i class="fa fa-plus"></i> Agregar</a>
                     </div>
               </div>
+            <?php endif ?>
 
               <table id="listado_registros" class="table table-bordered table-hover">
                 <thead>

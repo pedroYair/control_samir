@@ -27,6 +27,7 @@
                 }
             ?>
 
+            <?php if($_SESSION['NIVEL'] != 'lector'): ?>
               <div class="form-group">
                     <div class="col-md-offset-2 col-md-8" style="margin-left:0px;">
                       <?php
@@ -47,6 +48,7 @@
                       ?>
                     </div>
               </div>
+            <?php endif ?>
 
               <table id="listado_ventas" class="table table-bordered table-hover">
                 <thead>

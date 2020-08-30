@@ -16,7 +16,21 @@
     session_start();
 
     // verifica que el usuario tenga el nivel de administrador para hacer cambios en el panel de control
-    function verificar_seguridad($nivel = "administrador")
+    function verificar_seguridad()
+    {
+        if($_SESSION['NIVEL'] == 'lector')
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+        // return $_SESSION['NIVEL'] == $nivel;
+    }
+
+    // se verifica que el usuario tenga el rol de administrador (solo para gestion de usuarios)
+    function verificar_seguridad_usuarios($nivel = "administrador")
     {
         return $_SESSION['NIVEL'] == $nivel;
     }
