@@ -64,14 +64,12 @@
 					{
 						while($columnas = mysqli_fetch_assoc($exc))
 						{
-              $fecha = date("d/m/Y", strtotime($columnas['FECHA']));
-
               if($columnas['ID'] == $id_ultimo)
               {
 							
 							echo <<<fila
 							<tr id="$columnas[ID]">
-							  <td>$fecha</td>
+							  <td>$columnas[FECHA]</td>
 							  <td>$columnas[ING_PAPELERIA]</td>
                 <td>$columnas[ING_RECARGAS]</td>
                 <td>$columnas[DEUDAS_CANCEL]</td>
@@ -91,7 +89,7 @@ fila;
             {
               echo <<<fila
               <tr id="$columnas[ID]">
-                <td>$fecha</td>
+                <td>$columnas[FECHA]</td>
                 <td>$columnas[ING_PAPELERIA]</td>
                 <td>$columnas[ING_RECARGAS]</td>
                 <td>$columnas[DEUDAS_CANCEL]</td>

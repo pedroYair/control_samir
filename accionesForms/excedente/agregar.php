@@ -2,7 +2,7 @@
 
 	if(isset($_POST['caja_anterior']))
 	{
-		$fecha = date('Y-m-d');
+		$fecha = date('Y-m-d',strtotime($_POST['fecha']));
 		$caja_anterior = $_POST['caja_anterior'];
 		$recargas = $_POST['recargas'];
 		$papeleria = $_POST['papeleria'];

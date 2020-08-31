@@ -347,13 +347,7 @@ TABLES;
 
   	for(var i=0; i<data.length; i++)
   	{
-  		var d = new Date(data[i]['FECHA']);
-		var ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
-		var mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(d);
-		var da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
-
-		var fecha = `${da}-${mo}-${ye}`;
-  		labels.push(fecha);
+  		labels.push(data[i]['FECHA']);
   		valores.push(data[i]['TOTAL_REAL']);
   	}
 

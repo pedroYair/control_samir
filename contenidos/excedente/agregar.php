@@ -20,6 +20,15 @@
             <div class="box-body">
               <form role="form" action="accionesForms/excedente/agregar.php"  method="post">
 
+                 <div class="row">
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                          <label>Fecha control</label>
+                          <input id="fecha" type="date" name="fecha" class="form-control" required/>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="row">
                   <div class="col-xs-3">
                     <div class="form-group">
