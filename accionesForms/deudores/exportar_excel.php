@@ -11,44 +11,28 @@
 
 
 		$result = mysqli_query($cnx, $queryexport);
-		$row = mysqli_fetch_assoc($result);
-		$header = '';
 
-		$cabeceras = array('Fecha Deuda', 'Subtotal', 'Servicio', 'Observacion');
-		for ($i = 0; $i < sizeof($cabeceras); $i++)
-		{
-		   $header .= $cabeceras[$i]."\t";
-		}
+		$columnHeader = "Fecha deuda" . "\t" . "Subtotal" . "\t" . "Servicio" . "\t" . "Observacion";
 
-		$data = "";
-		while($row = mysqli_fetch_row($result))
-		{
-		   $line = '';
-		   foreach($row as $value){
-		          if(!isset($value) || $value == ""){
-		                 $value = "\t";
-		          }else{
-		                 $value = str_replace('"', '""', $value);
-		                 $value = '"' . $value . '"' . "\t";
-		                 }
-		          $line .= $value;
-		          }
-		   $data .= trim($line)."\n";
-		   $data = str_replace("\r", "", $data);
-
-			if ($data == "") 
-			{
-			   $data = "\nno matching records found\n";
-			}
-		}
+		$setData = ''; 
+		while ($rec = mysqli_fetch_row($result)) 
+		{  
+		    $rowData = '';  
+		    foreach ($rec as $value) {  
+		        $value = '"' . $value . '"' . "\t";  
+		        $rowData .= $value;  
+		    }  
+		    $setData .= trim($rowData) . "\n";  
+		} 
+		
 		header("Content-type: application/vnd.ms-Excel; name='Excel'");
 		header("Content-Disposition: attachment; filename=Historial de deudas.xls");
 		header("Pragma: no-cache");
 		header("Expires: 0");
-
+		
 		// output data
-		echo $header."\n".$data;
+		echo ucwords($columnHeader) . "\n" . $setData . "\n"; 
 
-		mysqli_close($cnx);
+		// mysqli_close($cnx);
 	}
 ?>
