@@ -43,7 +43,6 @@
               <table id="listado_deudas" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>#</th>
                   <th>Nombre</th>
                   <th>Estado</th>
                   <th>Deuda Total</th>
@@ -56,7 +55,6 @@
 				<?php
 					if($cnx)
 					{
-            $contador = 1;
             
 						while($columnas = mysqli_fetch_assoc($exc))
 						{
@@ -91,7 +89,6 @@
               
 							echo <<<fila
 							<tr id="$columnas[ID]">
-							  <td>$contador</td>
 							  <td>$columnas[NOMBRE]</td>
                 <td>$estado</td>
 							  <td>$columnas[TOTAL_DEUDAS]</td>
@@ -99,11 +96,15 @@
 							  <td>$saldo</td>
                 <td>
                 $boton_abonar
-                <a class="btn btn-primary" title="Ver historial de deudas y abonos" href="index.php?seccion=deudas&accion=ver_historial&id=$columnas[ID]"><i class="fa fa-eye"></i></a>
+                <a class="btn btn-primary" title="Ver historial de deudas y abonos" href="index.php?seccion=deudas&accion=ver_historial&id=$columnas[ID]"><i class="fa fa-eye"></i>
+                </a>
+                <a class="btn btn-primary" title="Exportar excel historial de deudas" href="accionesForms/deudores/exportar_excel.php?id=$columnas[ID]"><i class="fa fa-download"></i>
+                </a>
+                <a class="btn btn-primary" title="Ver historial de deudas y abonos" href="accionesForms/deudores/exportar_excel?id=$columnas[ID]"><i class="fa fa-eye"></i>
+                </a>
                 </td>
 							</tr>
 fila;
-            $contador++;
 						}
 					}
 				?>
