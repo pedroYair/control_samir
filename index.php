@@ -315,7 +315,7 @@ TABLES;
 		  'lengthChange': true,
 		  'searching'   : true,
 		  'ordering'    : true,
-		  'order': [[ 5, "desc" ]],
+		  'order': [[ 4, "desc" ]],
 		  'info'        : true,
 		  'autoWidth'   : false
 		})

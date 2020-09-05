@@ -1,8 +1,8 @@
 <?php 
 	if(isset($_POST['deudor']))
 	{
+		$fecha = date('Y-m-d',strtotime($_POST['fecha']));
 		$id_deudor = $_POST['deudor'];
-		$total_deuda = $_POST['total'];
 		$obs = $_POST['observacion'];
 	}
 
@@ -17,8 +17,8 @@
 	
 	$c = "INSERT INTO deuda
 			SET FK_DEUDOR = '$id_deudor',
-			TOTAL = '$total_deuda',
-			FECHA_DEUDA = NOW(),
+			TOTAL = '0',
+			FECHA_DEUDA = '$fecha',
 			OBSERVACION = '$obs'";
 	
 	$f = mysqli_query($cnx, $c);

@@ -15,30 +15,43 @@
             <div class="box-body">
               <form role="form" action="accionesForms/deudas/agregar.php"  method="post">
 
-                <!-- text input -->
-                <div class="form-group">
-                  <label>Deudor (Solo deudores habilitados)</label>
-                  <select name="deudor" class="form-control select2">
-                  <?php
-                    while($deudor = mysqli_fetch_assoc($exc))
-                    {
-                      echo <<<DEUDOR
-                      <option value="$deudor[ID]">$deudor[NOMBRE]</option>
-DEUDOR;
-                    }
-                  ?>
-                  </select>
+                <div class="row">
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                          <label>Fecha deuda</label>
+                          <input id="fecha" type="date" name="fecha" class="form-control" required/>
+                    </div>
+                  </div>
                 </div>
 
-                <div class="form-group">
-                  <input type="hidden" name="total" min="50" value="0" class="form-control">
+                <div class="row">
+                  <div class="col-xs-10">
+                    <div class="form-group">
+                      <label>Deudor (Solo deudores habilitados)</label>
+                      <select name="deudor" class="form-control select2">
+                      <?php
+                        while($deudor = mysqli_fetch_assoc($exc))
+                        {
+                          echo <<<DEUDOR
+                          <option value="$deudor[ID]">$deudor[NOMBRE]</option>
+DEUDOR;
+                        }
+                      ?>
+                      </select>
+                    </div>
+                  </div>
                 </div>
 
                 <!-- textarea -->
-                <div class="form-group">
-                  <label>Observación</label>
-                  <textarea id="obs" name="observacion" class="form-control" rows="3" placeholder="(Opcional)"></textarea>
+                <div class="row">
+                  <div class="col-xs-10">
+                    <div class="form-group">
+                      <label>Observación</label>
+                      <textarea id="obs" name="observacion" class="form-control" rows="3" placeholder="(Opcional)"></textarea>
+                    </div>
+                  </div>
                 </div>
+
                
             </div>
 
