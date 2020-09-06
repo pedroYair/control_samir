@@ -11,6 +11,23 @@
 
   $saldo_anterior = is_null($ultimo['SALDO_CIERRE_REAL']) ? 0 : $ultimo['SALDO_CIERRE_REAL'];
 
+  // datos modal deudas de recargas
+  $hoy = date('Y-m-d');
+  $nombre_servicio = "RECARGA";
+
+  $consul_c2 = "SELECT SUBTOTAL, NOMBRE, a.OBSERVACION
+                  FROM detalle_deuda AS d JOIN servicios AS s ON d.FK_SERVICIO = s.ID 
+                    JOIN deuda AS a ON a.ID = d.FK_DEUDA
+                      JOIN deudor AS c ON c.ID = a.FK_DEUDOR 
+                        WHERE s.SERVICIO LIKE '%$nombre_servicio%' AND FECHA_DEUDA BETWEEN '$hoy' AND '$hoy 23:59:59'";
+  $exc_resp2 = mysqli_query($cnx, $consul_c2);
+
+  // datos modal abonos hoy
+  $consul_c4 = "SELECT NOMBRE, ABONADO, a.OBSERVACION FROM abonos AS a
+                  JOIN deudor AS b ON a.FK_DEUDOR = b.ID
+                    WHERE FECHA_ABONO BETWEEN '$hoy' AND '$hoy 23:59:59'";
+  $exc_resp4 = mysqli_query($cnx, $consul_c4);
+
 ?>
 
 <!-- general form elements disabled -->
@@ -27,6 +44,20 @@
                     <div class="form-group">
                           <label>Fecha control</label>
                           <input id="fecha" type="date" name="fecha" class="form-control" required/>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-2">
+                    <div class="form-group">
+                          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default"> Deudas por pagar hoy
+                          </button>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-2">
+                    <div class="form-group">
+                          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default2"> Deudas canceladas hoy
+                          </button>
                     </div>
                   </div>
                 </div>
@@ -186,6 +217,108 @@
           </div>
             <!-- /.box-body -->
 </div>
+
+<div class="modal fade" id="modal-default">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Deudas por pagar <?php echo $hoy; ?></h4>
+              </div>
+              <div class="modal-body">
+                <table id="listado_registros" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Deudor</th>
+                  <th>Valor</th>
+                  <th>Observación</th>
+                </tr>
+                </thead>
+                <tbody>
+        <?php
+          if($cnx)
+          {
+            $contador = 1;
+            while($columnas = mysqli_fetch_assoc($exc_resp2 ))
+            {
+              echo <<<fila
+              <tr>
+                <td>$contador</td>
+                <td>$columnas[NOMBRE]</td>
+                <td>$columnas[SUBTOTAL]</td>
+                <td>$columnas[OBSERVACION]</td>
+              </tr>
+fila;
+            $contador++;
+            }
+
+            mysqli_free_result($exc_resp2);
+          }
+        ?>
+                </tfoot>
+              </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="modal-default2">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Deudas canceladas <?php echo $hoy; ?></h4>
+              </div>
+              <div class="modal-body">
+                <table id="listado_abonos_hoy" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Deudor</th>
+                  <th>Valor</th>
+                  <th>Observación</th>
+                </tr>
+                </thead>
+                <tbody>
+        <?php
+          if($cnx)
+          {
+            $contador = 1;
+            while($columnas = mysqli_fetch_assoc($exc_resp4))
+            {
+              echo <<<fila
+              <tr>
+                <td>$contador</td>
+                <td>$columnas[NOMBRE]</td>
+                <td>$columnas[ABONADO]</td>
+                <td>$columnas[OBSERVACION]</td>
+              </tr>
+fila;
+            $contador++;
+            }
+
+            mysqli_free_result($exc_resp4);
+          }
+        ?>
+                </tfoot>
+              </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
 
  <script>
   document.getElementById("recargado").onmouseout = function()
