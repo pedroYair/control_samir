@@ -98,10 +98,6 @@
                 $boton_abonar
                 <a class="btn btn-primary" title="Ver historial de deudas y abonos" href="index.php?seccion=deudas&accion=ver_historial&id=$columnas[ID]"><i class="fa fa-eye"></i>
                 </a>
-                <a class="btn btn-primary" title="Exportar excel historial de deudas" href="accionesForms/deudores/exportar_excel.php?id=$columnas[ID]"><i class="fa fa-download"></i>
-                </a>
-                <a class="btn btn-primary" title="Ver historial de deudas y abonos" href="accionesForms/deudores/exportar_excel?id=$columnas[ID]"><i class="fa fa-eye"></i>
-                </a>
                 </td>
 							</tr>
 fila;

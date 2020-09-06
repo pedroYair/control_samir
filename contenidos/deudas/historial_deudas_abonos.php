@@ -22,6 +22,13 @@
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1">
+
+              	<div class="form-group">
+                    <div class="col-md-offset-2 col-md-8" style="margin-left:0px;">
+                        <a class="btn btn-primary" href="accionesForms/deudas/exportar_excel.php?id=<?php echo $id_deudor; ?>" title="Exportar a excel" style="margin:10px;"><i class="fa fa-download"></i> Exportar</a>
+                    </div>
+              	</div>
+
                 <table id="listado_historial_deudas" class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -60,6 +67,12 @@ fila;
               </div>
               <!-- /.tab-pane -->
               <div class="tab-pane" id="tab_2">
+              	<div class="form-group">
+                    <div class="col-md-offset-2 col-md-8" style="margin-left:0px;">
+                        <a class="btn btn-primary" href="accionesForms/abonos/exportar_excel.php?id=<?php echo $id_deudor; ?>" title="Exportar a excel" style="margin:10px;"><i class="fa fa-download"></i> Exportar</a>
+                    </div>
+              	</div>
+
                 <table id="listado_historial_abonos" class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -68,6 +81,7 @@ fila;
                   <th>Servicio</th>
                   <th>Abonado</th>
                   <th>Observación</th>
+                  <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -84,6 +98,10 @@ fila;
 							  <td>$columnas[SERVICIO]</td>
 							  <td>$columnas[ABONADO]</td>
 							  <td>$columnas[OBSERVACION]</td>
+							  <td>
+								<a class="btn btn-primary" title="Exportar excel historial de deudas" href="accionesForms/abonos/exportar_excel.php?id=$id_deudor"><i class="fa fa-download"></i>
+                				</a>
+							  </td>
 							</tr>
 fila;
             $contador++;

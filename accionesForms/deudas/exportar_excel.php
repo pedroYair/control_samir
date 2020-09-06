@@ -3,6 +3,7 @@
 	if(isset($_GET['id']))
 	{
 		$id_deudor = $_GET['id'];
+
 		include( '../../setup/configuracion.php' );
 
 		$queryexport = "SELECT FECHA_DEUDA, SUBTOTAL, SERVICIO, a.OBSERVACION
@@ -32,7 +33,5 @@
 		
 		// output data
 		echo ucwords($columnHeader) . "\n" . $setData . "\n"; 
-
-		// mysqli_close($cnx);
 	}
 ?>
